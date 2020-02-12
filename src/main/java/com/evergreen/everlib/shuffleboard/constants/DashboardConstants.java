@@ -14,7 +14,9 @@ public class DashboardConstants extends Explorer {
     private static final DashboardConstants m_instance = new DashboardConstants();
 
     /**Singleton Constructor (private empty)*/
-    private DashboardConstants() {}
+    private DashboardConstants() {
+        super("Constants Explorer");
+    }
 
     
     public void move(String folder, Constant... constants) {

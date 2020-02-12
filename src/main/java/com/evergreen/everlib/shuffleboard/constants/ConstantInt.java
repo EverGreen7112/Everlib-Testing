@@ -18,8 +18,14 @@ public class ConstantInt extends Constant implements Supplier<Integer> {
     
     @Override
     public void addToDashboard() {
-        Preferences.getInstance().putInt(getPath(), m_defaultVal);
+        addToDashboard(m_defaultVal);
     }
+
+    @Override
+    protected void addToDashboard(Object value) {
+        Preferences.getInstance().putInt(getPath(), (int)value);
+    }
+
 
     @Override
     public String getType() {

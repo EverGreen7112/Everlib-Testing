@@ -56,6 +56,7 @@ public class SetMotorSystem extends EvergreenCommand {
    * @param subsystem - The subsystem to move.
    * 
    * @param limit - The range for this movement - when it is out of the range, the command will end.
+   * This limit is tested against the subsystem's {@link SubsystemEG#getPosition() getDistance()} method. 
    * This limit is tested against the subsystem's {@link EvergreenSubsystem#getPosition() getDistance()} method. 
    * 
    * @param speedModifier - A modifier for the speeds given. Espically usefull when the main suppliers come,
@@ -84,6 +85,7 @@ public class SetMotorSystem extends EvergreenCommand {
    * @param subsystem - The subsystem to move.
    * 
    * @param limit - The range for this movement - when it is out of the range, the command will end.
+   * This limit is tested against the subsystem's {@link SubsystemEG#getPosition() getDistance()} method. 
    * This limit is tested against the subsystem's {@link EvergreenSubsystem#getPosition() getDistance()} method. 
    * 
    * @param speedModifier - A modifier for the speeds given. Espically usefull when the main suppliers come,
