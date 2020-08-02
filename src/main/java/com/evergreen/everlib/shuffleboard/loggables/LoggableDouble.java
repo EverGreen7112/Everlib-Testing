@@ -5,12 +5,19 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 /**
- * LoggableNumber
+ * LoggableDouble represent double that could be logged to the dashboard and updated continuously.
  */
 public class LoggableDouble extends LoggableData {
-    
+    /**
+     * the double supplier which will update the value of the object.
+     */
     Supplier<Double> m_stream;
-
+    /**
+     * Creates new instance of LoggableDouble, by key and double supplier.
+     * 
+     * @param key    String that use for accessing through the dashboard.
+     * @param stream the double supplier which will update the value of the object.
+     */
     public LoggableDouble(String key, Supplier<Double> stream) {
         super(key);
         m_stream = stream;
@@ -27,7 +34,7 @@ public class LoggableDouble extends LoggableData {
     }
 
     @Override
-    public String getValue() {
+    public String getStringValue() {
         return m_stream.get().toString();
     }
 
