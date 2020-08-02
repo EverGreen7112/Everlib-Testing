@@ -2,7 +2,7 @@ package com.evergreen.everlib.subsystems.pistons.subsystems;
 
 import java.util.List;
 
-import com.evergreen.everlib.subsystems.SubsystemEG;
+import com.evergreen.everlib.subsystems.EvergreenSubsystem;
 import com.evergreen.everlib.shuffleboard.loggables.LoggableData;
 import com.evergreen.everlib.shuffleboard.loggables.LoggableString;
 
@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
  * {@link DoubleSolenoid.Value#kForward Forward} and {@link DoubleSolenoid.Value#kReverse Reverse,}
  * and {@link DoubleSolenoid.Value#kOff Off},    
  */
-public class PistonSubsystem extends SubsystemEG {
+public class PistonSubsystem extends EvergreenSubsystem {
 
     private DoubleSolenoid m_piston;
 

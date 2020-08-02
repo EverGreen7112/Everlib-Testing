@@ -2,8 +2,8 @@ package com.evergreen.everlib.shuffleboard.constants.commands;
 
 import java.util.function.Supplier;
 
-import com.evergreen.everlib.CommandEG;
 import com.evergreen.everlib.shuffleboard.constants.ConstantDouble;
+import com.evergreen.everlib.subsystems.EvergreenCommand;
 
 /**
  * A command to set a {@link ConstantDouble} a certain value,
@@ -12,8 +12,7 @@ import com.evergreen.everlib.shuffleboard.constants.ConstantDouble;
  * 
  * @author Atai Ambus
  */
-public class SetConstantUntil extends CommandEG {
-
+public class SetConstantUntil extends EvergreenCommand {
     /**The {@link #isFinished()} condition.*/
     Supplier<Boolean> m_until;
     /**The constant to set.*/

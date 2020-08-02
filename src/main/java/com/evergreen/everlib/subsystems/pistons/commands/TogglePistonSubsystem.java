@@ -2,13 +2,13 @@ package com.evergreen.everlib.subsystems.pistons.commands;
 
 import java.util.List;
 
-import com.evergreen.everlib.CommandEG;
+import com.evergreen.everlib.subsystems.EvergreenCommand;
 import com.evergreen.everlib.subsystems.pistons.subsystems.PistonSubsystem;
 import com.evergreen.everlib.shuffleboard.loggables.LoggableData;
 import com.evergreen.everlib.shuffleboard.loggables.LoggableString;
 
 /**TogglePistonSubsystem */
-public class TogglePistonSubsystem extends CommandEG {
+public class TogglePistonSubsystem extends EvergreenCommand {
 
    PistonSubsystem m_pistons;
   

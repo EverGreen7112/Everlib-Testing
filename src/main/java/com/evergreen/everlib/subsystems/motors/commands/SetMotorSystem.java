@@ -12,8 +12,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
 
-import com.evergreen.everlib.CommandEG;
-import com.evergreen.everlib.subsystems.SubsystemEG;
+import com.evergreen.everlib.subsystems.EvergreenCommand;
+import com.evergreen.everlib.subsystems.EvergreenSubsystem;
 import com.evergreen.everlib.subsystems.motors.subsystems.MotorController;
 import com.evergreen.everlib.subsystems.motors.subsystems.MotorSubsystem;
 import com.evergreen.everlib.shuffleboard.loggables.LoggableBoolean;
@@ -27,7 +27,7 @@ import com.evergreen.everlib.utils.ranges.Range;
  * 
  * @author Atai Ambus
 */
-public class SetMotorSystem extends CommandEG {
+public class SetMotorSystem extends EvergreenCommand {
 
   /**The command's subsystem to be moved. */
   protected MotorSubsystem m_subsystem;
@@ -57,6 +57,7 @@ public class SetMotorSystem extends CommandEG {
    * 
    * @param limit - The range for this movement - when it is out of the range, the command will end.
    * This limit is tested against the subsystem's {@link SubsystemEG#getPosition() getDistance()} method. 
+   * This limit is tested against the subsystem's {@link EvergreenSubsystem#getPosition() getDistance()} method. 
    * 
    * @param speedModifier - A modifier for the speeds given. Espically usefull when the main suppliers come,
    * for example, from joystick.
@@ -85,6 +86,7 @@ public class SetMotorSystem extends CommandEG {
    * 
    * @param limit - The range for this movement - when it is out of the range, the command will end.
    * This limit is tested against the subsystem's {@link SubsystemEG#getPosition() getDistance()} method. 
+   * This limit is tested against the subsystem's {@link EvergreenSubsystem#getPosition() getDistance()} method. 
    * 
    * @param speedModifier - A modifier for the speeds given. Espically usefull when the main suppliers come,
    * for example, from joystick.
@@ -107,7 +109,7 @@ public class SetMotorSystem extends CommandEG {
    * @param subsystem - The subsystem to move.
    * 
    * @param limit - The range for this movement - when it is out of the range, the command will end.
-   * This limit is tested against the subsystem's {@link SubsystemEG#getPosition() getDistance()} method. 
+   * This limit is tested against the subsystem's {@link EvergreenSubsystem#getPosition() getDistance()} method. 
    * @param speedMap - A {@link Map} which {@link MotorController} indexes on the subsystem to speed
    * suppliers to set.
    *  
@@ -189,7 +191,7 @@ public class SetMotorSystem extends CommandEG {
   
     for (Map.Entry<Integer, Supplier<Double>> speedEntry : m_speedMap.entrySet()) {
       loggables.add(new LoggableDouble(
-        getName() + " - speed #" + speedEntry.getKey(), speedEntry.getValue())); 
+        getName() + "/Speed #" + speedEntry.getKey(), speedEntry.getValue())); 
     }
 
     return loggables;

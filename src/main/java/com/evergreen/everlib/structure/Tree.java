@@ -3,8 +3,8 @@ package com.evergreen.everlib.structure;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.evergreen.everlib.CommandEG;
 import com.evergreen.everlib.shuffleboard.loggables.DashboardStreams;
+import com.evergreen.everlib.subsystems.EvergreenCommand;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 
@@ -24,7 +24,7 @@ public abstract class Tree extends TimedRobot {
     public void autonomousInit() {
         whenEnabled();
         autoConfig();
-        for (CommandEG autoCommand : getAutoCommands()) {
+        for (EvergreenCommand autoCommand : getAutoCommands()) {
             autoCommand.schedule();
         }
     }
@@ -33,7 +33,7 @@ public abstract class Tree extends TimedRobot {
     public void teleopInit() {
         teleopConfig();
 
-        for (CommandEG teleopCommand : getTeleopCommands()) {
+        for (EvergreenCommand teleopCommand : getTeleopCommands()) {
             teleopCommand.schedule();
         }
     }
@@ -67,7 +67,7 @@ public abstract class Tree extends TimedRobot {
 
     protected void update() { }
 
-    protected List<CommandEG> getAutoCommands() { return new ArrayList<>(); }
-    protected List<CommandEG> getTeleopCommands() { return new ArrayList<>(); }
+    protected List<EvergreenCommand> getAutoCommands() { return new ArrayList<>(); }
+    protected List<EvergreenCommand> getTeleopCommands() { return new ArrayList<>(); }
 
 }

@@ -2,14 +2,14 @@ package com.evergreen.everlib.subsystems.pistons.commands;
 
 import java.util.List;
 
-import com.evergreen.everlib.CommandEG;
+import com.evergreen.everlib.subsystems.EvergreenCommand;
 import com.evergreen.everlib.subsystems.pistons.subsystems.PistonSubsystem;
 import com.evergreen.everlib.shuffleboard.loggables.LoggableData;
 import com.evergreen.everlib.shuffleboard.loggables.LoggableString;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
-public class SetPistonSubsystem extends CommandEG {
+public class SetPistonSubsystem extends EvergreenCommand {
   /**Supplier for the state to be set.
    * When this command executes, the */
   private Value m_state;

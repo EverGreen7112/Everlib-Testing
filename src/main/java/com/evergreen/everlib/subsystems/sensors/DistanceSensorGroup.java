@@ -5,16 +5,16 @@ import java.util.List;
 
 import com.evergreen.everlib.shuffleboard.loggables.LoggableData;
 import com.evergreen.everlib.shuffleboard.loggables.LoggableDouble;
-import com.evergreen.everlib.shuffleboard.loggables.LoggableObject;
 
 /**
  * SensorGroup
  */
-public class DistanceSensorGroup extends DistanceSensor implements LoggableObject {
+public class DistanceSensorGroup extends DistanceSensor {
     List<DistanceSensor> m_sensors;
     int sum;
 
-    public DistanceSensorGroup(DistanceSensor... sensors) {
+    public DistanceSensorGroup(String name, DistanceSensor... sensors) {
+        super(name);
         m_sensors = List.of(sensors);
     }
 
@@ -30,7 +30,7 @@ public class DistanceSensorGroup extends DistanceSensor implements LoggableObjec
                 continue;
             }
             
-            sum += sensor.getDistance();
+            sum += sensor.getPosition();
         }
 
         return sum / m_sensors.size();
@@ -42,7 +42,7 @@ public class DistanceSensorGroup extends DistanceSensor implements LoggableObjec
 
     @Override
     public String getName() {
-        return getSubsystem() + " - Distance sensor";
+        return getSubsystem() + "/Distance sensor";
     }
 
     public void addSensor(DistanceSensor sensor) {
@@ -59,7 +59,7 @@ public class DistanceSensorGroup extends DistanceSensor implements LoggableObjec
 
         for (DistanceSensor sensor : m_sensors) { 
             loggables.add(new LoggableDouble(getSubsystem() + "/sensors/" + sensor.toString(),
-            sensor::getDistance));
+            sensor::getPosition));
         }
 
         return loggables;

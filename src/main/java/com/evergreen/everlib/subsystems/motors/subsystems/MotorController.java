@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
-import com.evergreen.everlib.subsystems.sensors.EncoderEG;
+import com.evergreen.everlib.subsystems.sensors.EvergreenEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
@@ -65,14 +65,17 @@ public class MotorController implements SpeedController, LoggableObject {
 
             if (type == ControllerType.SPARKMAX_BRUSHED || 
                 type == ControllerType.SPARKMAX_BRUSHLESS) {
-                    m_encoders.add(new EncoderEG(
+                    m_encoders.add(new EvergreenEncoder( 
+                        getName() + "/Encoder #" + i,
                         //Casting the motor to sparkmax to get its encoder
                         ((CANSparkMax)iterationMotor) 
-                        .getEncoder()));
-                }
+                            .getEncoder()));
+            }
                 
             else if (type == ControllerType.TALON_SRX) {
-                m_encoders.add(new EncoderEG((WPI_TalonSRX)iterationMotor));
+                m_encoders.add(new EvergreenEncoder(
+                    getName() + "/Encoder #" + i,
+                    (WPI_TalonSRX)iterationMotor));
             }
 
             m_motors.add(iterationMotor);
@@ -87,7 +90,7 @@ public class MotorController implements SpeedController, LoggableObject {
     /**
      * @return A list of all encoders this motor uses.
      */
-    public List<EncoderEG> getEncoders() {
+    public List<EvergreenEncoder> getEncoders() {
         return m_encoders;
     }
 
@@ -97,7 +100,7 @@ public class MotorController implements SpeedController, LoggableObject {
      * <p>
      * If the controller has no encoders, a  {@link SensorDoesNotExistException} will be thrown
      */
-    public EncoderEG getEncoder() {
+    public EvergreenEncoder getEncoder() {
 
         if (m_encoders.isEmpty())
             throw new SensorDoesNotExistException("Tried to get an encoder of \"" + getName() + "\","
