@@ -31,6 +31,7 @@ public class ConstantInt extends Constant implements Supplier<Integer> {
     public String getType() {
         return "Integer";
     }
+
     public void increaseAbsolute(int increaseBy) {
         m_defaultVal += increaseBy;
         addToDashboard();

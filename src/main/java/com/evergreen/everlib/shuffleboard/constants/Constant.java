@@ -68,8 +68,8 @@ public abstract class Constant {
 
 
     /**
-     * Moves the constant to a folder - as per unix
-     * @param folder
+     * Moves the constant to a folder, with respect to standart path syntax (., .. and /)
+     * @param folder, 
      */
     public void move(String folder) {
         remove();

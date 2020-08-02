@@ -63,7 +63,7 @@ public class Test extends Tree {
             "Chassis Left Encoder", 
             () -> (double)((WPI_TalonSRX)m_motorLeft.getMotors().get(0)).getSelectedSensorPosition());
         DashboardStreams.getInstance().addDouble(
-            "Talon Encoder", () -> m_leftA.getSelectedSensorPosition() * 1.0);
+            "Talon Encoder", m_leftA::getSelectedSensorPosition);
     }
 
     @Override

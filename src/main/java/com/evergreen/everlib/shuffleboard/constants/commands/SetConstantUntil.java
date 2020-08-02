@@ -13,6 +13,7 @@ import com.evergreen.everlib.shuffleboard.constants.ConstantDouble;
  * @author Atai Ambus
  */
 public class SetConstantUntil extends CommandEG {
+
     /**The {@link #isFinished()} condition.*/
     Supplier<Boolean> m_until;
     /**The constant to set.*/
@@ -63,7 +64,7 @@ public class SetConstantUntil extends CommandEG {
         return m_until.get();
     }
 
-    /**When the command ends (that is the condition is met) or get intterupted */
+    /**When the command ends (that is the condition is met) or gets intterupted, revert the constant baclk to its original value. */
     @Override
     public void end(boolean interrupted) {
         m_constant.setValue(m_initValue);
