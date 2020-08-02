@@ -29,16 +29,18 @@ public abstract class Constant {
      */
     public Constant(String name, Object value) {
         m_name = name;
-        m_folder = DashboardConstants.getInstance().pwd();
+        m_folder = DashboardConstants.getInstance().pwd()
+            .substring(1); //Remove root / - incompatiable with suffleboard.
 
         if (wasAdded()) {
             System.out.println(String.format(
                 "Tried to add %s constant \"%s\" at %s, but a constant already"
                 + " exists in that path!", 
                 getType(), m_name, m_folder));
-        }
+        } 
+        
 
-        addToDashboard();
+        addToDashboard(value);
         System.out.println(String.format("Added %s constant \"%s\" at %s - %s",
             getType(), m_name, m_folder, value.toString()));
 
@@ -92,7 +94,9 @@ public abstract class Constant {
 
     
     public abstract void addToDashboard();
-    
+    protected abstract void addToDashboard(Object value);
+
+
     public void reset() {
         addToDashboard();
     }

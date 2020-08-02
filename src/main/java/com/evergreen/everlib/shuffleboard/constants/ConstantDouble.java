@@ -12,6 +12,8 @@ public class ConstantDouble extends Constant implements Supplier<Double> {
     
     double m_defaultVal;
 
+
+
     public ConstantDouble(String key, double initValue) {
         super(key, initValue);
         m_defaultVal = initValue;
@@ -19,7 +21,12 @@ public class ConstantDouble extends Constant implements Supplier<Double> {
 
     @Override
     public void addToDashboard() {
-        Preferences.getInstance().putDouble(getPath(), m_defaultVal);
+        addToDashboard(m_defaultVal);
+    }
+    @Override
+    public void addToDashboard(Object value) {
+        Preferences.getInstance().putDouble(getPath(), (double)value);
+        
     }
 
     @Override
@@ -29,7 +36,7 @@ public class ConstantDouble extends Constant implements Supplier<Double> {
 
     public void setValue(double value) {
         m_defaultVal = value;
-        addToDashboard();
+        reset();
     }
 
     @Override

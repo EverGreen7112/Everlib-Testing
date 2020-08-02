@@ -23,7 +23,12 @@ public class ConstantString extends Constant implements Supplier<String> {
 
     @Override
     public void addToDashboard() {
-        Preferences.getInstance().putString(getPath(), m_defaultVal);
+        addToDashboard(m_defaultVal);
+    }
+
+    @Override
+    protected void addToDashboard(Object value) {
+        Preferences.getInstance().putString(getPath(), value.toString());
     }
 
     @Override

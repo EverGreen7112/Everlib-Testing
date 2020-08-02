@@ -32,7 +32,7 @@ public class ConstantBoolean extends Constant implements Supplier<Boolean> {
 
     @Override
     public void addToDashboard() {
-        Preferences.getInstance().putBoolean(getPath(), m_defaultVal);
+        addToDashboard(m_defaultVal);
     }
 
     public void set(boolean value) {
@@ -52,6 +52,11 @@ public class ConstantBoolean extends Constant implements Supplier<Boolean> {
     public void enable() 
     {
         set(true);
+    }
+
+    @Override
+    protected void addToDashboard(Object value) {
+        Preferences.getInstance().putBoolean(getPath(), (boolean)value);
     }
 
 }

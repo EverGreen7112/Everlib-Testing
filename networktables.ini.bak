@@ -1,0 +1,9 @@
+[NetworkTables Storage 3.0]
+string "/Preferences/.type"="RobotPreferences"
+string "/Preferences/Stuff//Calcs/Remarks"="testing."
+double "/Preferences/Stuff//Checks/Joystick Port"=0
+string "/Preferences/Stuff/Calcs/Remarks"="testing"
+double "/Preferences/Stuff/Checks/Joystick Port"=0
+boolean "/Preferences/Stuff/Moveable"=false
+string "/Preferences/Stuff/Path"="Where am I now?"
+double "/Preferences/subsytemStuff/Constants/Velocity Modifier"=0.5
