@@ -7,9 +7,6 @@ import java.util.Stack;
 import com.evergreen.everlib.shuffleboard.loggables.LoggableData;
 import com.evergreen.everlib.shuffleboard.loggables.LoggableObject;
 import com.evergreen.everlib.shuffleboard.loggables.LoggableString;
-import com.evergreen.everlib.structure.Tree;
-
-import edu.wpi.first.wpilibj.Joystick;
 
 /**
  * Explorer
@@ -41,7 +38,7 @@ public class Explorer implements LoggableObject {
 
             if (folder.equals("..")) {
                 m_workingDirectory = 
-                    m_workingDirectory.substring(0, m_workingDirectory.lastIndexOf('/'));
+                    m_workingDirectory.substring(0, pwd().lastIndexOf('/') - 1);
             }
 
             else if (!folder.equals(".")) {

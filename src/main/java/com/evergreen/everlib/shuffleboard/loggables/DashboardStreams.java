@@ -26,7 +26,7 @@ public class DashboardStreams extends Explorer {
         return m_instance;
     }
 
-    public void log(LoggableData loggable) {
+    private void log(LoggableData loggable) {
         String name = loggable.getKey();
         String key = pwd() + "/" + name;
 
