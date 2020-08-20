@@ -43,7 +43,7 @@ public class MotorSystemBangBang extends MoveMotorSystem {
     Supplier<Double> target,
     String targetName) {
       
-      super(subsystem.getName() + " - Move to " + targetName, subsystem, motorSpeed);
+      super(subsystem.getName() + "/Move to " + targetName, subsystem, motorSpeed);
       
       m_target = target;
       m_startedInFront = IN_FRONT_SUPPLIER.get();

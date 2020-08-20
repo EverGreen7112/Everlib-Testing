@@ -8,39 +8,34 @@ import com.evergreen.everlib.shuffleboard.constants.ConstantBoolean;
 import com.evergreen.everlib.shuffleboard.loggables.LoggableData;
 import com.evergreen.everlib.shuffleboard.loggables.LoggableDouble;
 import com.evergreen.everlib.shuffleboard.loggables.LoggableObject;
+import com.evergreen.everlib.subsystems.sensors.AngleSensorGroup;
 import com.evergreen.everlib.subsystems.sensors.DistanceSensor;
 import com.evergreen.everlib.subsystems.sensors.DistanceSensorGroup;
 
-import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 
 /**
  * The subsys
  */
-public abstract class SubsystemEG extends SubsystemBase implements Exceptions, LoggableObject {
+public abstract class EvergreenSubsystem extends SubsystemBase implements Exceptions, LoggableObject {
 
     protected ConstantBoolean m_subsystemSwitch;
-    protected DistanceSensorGroup m_distanceSensor = new DistanceSensorGroup();
-    protected double m_lastPosition;
-    protected double m_lastCalcualtionTime;
+
+    protected DistanceSensorGroup m_distanceSensor = 
+        new DistanceSensorGroup(getName() + "/Distance Sensor");
+
+    protected AngleSensorGroup m_angleSensors = 
+        new AngleSensorGroup(getName() + "/Angle Sensor");
+        
+    protected EvergreenCommand m_currentlyUsedBy;
 
 
-    public SubsystemEG(String name) {
+    public EvergreenSubsystem(String name) {
         setName(name);
         m_subsystemSwitch  = new ConstantBoolean(name);
         
-    }
-
-    public SubsystemEG(String name, Command defaultCommand) {
-        this(name);
-        setDefaultCommand(defaultCommand);
-    }
-
-    public SubsystemEG(String name, Command defaultCommand, DistanceSensor distanceSesnsor) {
-        this(name, defaultCommand);
-        addSensor(distanceSesnsor);
-        m_distanceSensor.setSubsystem(this);
     }
 
     public ConstantBoolean getSwitch() {
@@ -51,16 +46,28 @@ public abstract class SubsystemEG extends SubsystemBase implements Exceptions, L
         return m_subsystemSwitch.get();
     }
 
-    public void addSensor(DistanceSensor sensor) {
+    public void addDistanceSensor(DistanceSensor sensor) {
         m_distanceSensor.addSensor(sensor);
+    }
+
+    public void addAngleSensor(Gyro angleSensor) {
+        m_angleSensors.addSensor(angleSensor);
+    }
+
+    public double getAngle() {
+        if (!m_angleSensors.isEmpty()) {
+            return m_angleSensors.getAngle();
+        }
+
+        throw new SensorDoesNotExistException(
+            "Tried to get the angle of " + getName() 
+            + ", but it does not have a angle sensor!");
     }
 
 
     public double getPosition() throws SensorDoesNotExistException {
         if (!m_distanceSensor.isEmpty()) {
-            m_lastPosition = m_distanceSensor.getDistance();
-            m_lastCalcualtionTime = System.currentTimeMillis() / 1000;
-            return m_lastPosition;
+            return m_distanceSensor.getPosition();
         }
 
         throw new SensorDoesNotExistException(
@@ -68,19 +75,32 @@ public abstract class SubsystemEG extends SubsystemBase implements Exceptions, L
             + ", but it does not have a distance sensor!");
     }
 
-    public synchronized double getVelocity() throws SensorDoesNotExistException {
+    void useWith(EvergreenCommand command) {
+        m_currentlyUsedBy = command;
+    }
+
+    public double getVelocity() throws SensorDoesNotExistException {
         if (!m_distanceSensor.isEmpty()) {
-            double lastPos = m_lastPosition;
-            double lastPosTime = m_lastCalcualtionTime;
-            double now = System.currentTimeMillis() / 1000;
-            
-            return (getPosition() - lastPos) / (now - lastPosTime);
+            return m_distanceSensor.getVelocity();
         }
 
         throw new SensorDoesNotExistException(
             "Tried to get the velocity of " + getName() 
             + ", but it does not have a distance sensor!");
     }
+
+    public double getAngularVelocity() throws SensorDoesNotExistException {
+        if (!m_angleSensors.isEmpty()) {
+            return m_angleSensors.getRate();
+        }
+
+        throw new SensorDoesNotExistException(
+            "Tried to get the angular velocity of " + getName()
+            + ", but it does not have any angke sensors!"
+        );
+    }
+
+
 
     @Override
     public List<LoggableData> getLoggableData() {
@@ -96,5 +116,4 @@ public abstract class SubsystemEG extends SubsystemBase implements Exceptions, L
 
         return loggables;
     }
-
 }

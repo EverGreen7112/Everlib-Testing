@@ -1,4 +1,4 @@
-package com.evergreen.everlib;
+package com.evergreen.everlib.subsystems;
 
 import java.util.List;
 
@@ -6,7 +6,6 @@ import com.evergreen.everlib.shuffleboard.constants.ConstantBoolean;
 import com.evergreen.everlib.shuffleboard.loggables.LoggableData;
 import com.evergreen.everlib.shuffleboard.loggables.LoggableInt;
 import com.evergreen.everlib.shuffleboard.loggables.LoggableObject;
-import com.evergreen.everlib.subsystems.SubsystemEG;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.Subsystem;
@@ -20,34 +19,34 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
  * 
  * @author Atai Ambus
  */
-public abstract class CommandEG extends CommandBase implements LoggableObject {
+public abstract class EvergreenCommand extends CommandBase implements LoggableObject {
     private ConstantBoolean m_commandSwitch;
 
     private int m_ranCounter = 0;
     
     /**
-     * Constructs a new {@link CommandEG} with input name, and without logging it in the shuffleboard
+     * Constructs a new {@link EvergreenCommand} with input name, and without logging it in the shuffleboard
      * @param name - The subsystem's name, corresponding to is {@link #getName()} method
      * as well as its {@link ConstantBoolean Shuffleboard Switch}.
      */
-    public CommandEG(String name) {
+    public EvergreenCommand(String name) {
         setName(name);
         m_commandSwitch = new ConstantBoolean(name + "/switch");
     }
 
     
     /**
-     * Constructs a new {@link CommandEG} with input name.
+     * Constructs a new {@link EvergreenCommand} with input name.
      * 
      * @param name - The subsystem's name, corresponding to is {@link #getName()} method
      * as well as its {@link ConstantBoolean Shuffleboard Switch}.
      * 
      * @param subsystems - Any subsystems the command requires.
      */
-    public CommandEG(String name, SubsystemEG... subsystems) {
+    public EvergreenCommand(String name, EvergreenSubsystem... subsystems) {
         this(name);
         
-        for (SubsystemEG subsystem : subsystems) {
+        for (EvergreenSubsystem subsystem : subsystems) {
             addRequirements((Subsystem)subsystem);
         }
 
@@ -61,6 +60,12 @@ public abstract class CommandEG extends CommandBase implements LoggableObject {
 
         if (canStart())
             super.schedule();
+
+        for (Subsystem subsystem : m_requirements) {
+            if (subsystem instanceof EvergreenSubsystem) {
+                ((EvergreenSubsystem)subsystem).useWith(this);
+            }
+        }
     }
 
 
@@ -101,8 +106,8 @@ public abstract class CommandEG extends CommandBase implements LoggableObject {
     private boolean canStart() {
         
         for (Subsystem subsystem : getRequirements()) {
-            if (subsystem instanceof SubsystemEG) {
-                SubsystemEG sub = (SubsystemEG)subsystem;
+            if (subsystem instanceof EvergreenSubsystem) {
+                EvergreenSubsystem sub = (EvergreenSubsystem)subsystem;
                 if (!sub.getSwitchState())
                     return false;
             }
@@ -117,6 +122,11 @@ public abstract class CommandEG extends CommandBase implements LoggableObject {
             new LoggableInt(getName() + "/Ran Counter", () -> m_ranCounter)
         });
     }
+
+    public void addRequirements(EvergreenSubsystem... subsystems ) {
+        super.addRequirements(subsystems);
+    }
+    
 
     @Override
     public void initSendable(SendableBuilder builder) { }

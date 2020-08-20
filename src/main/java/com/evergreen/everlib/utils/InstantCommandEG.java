@@ -1,11 +1,11 @@
 package com.evergreen.everlib.utils;
 
-import com.evergreen.everlib.CommandEG;
+import com.evergreen.everlib.subsystems.EvergreenCommand;
 
 /**
  * InstantCommandEG
  */
-public class InstantCommandEG extends CommandEG {
+public class InstantCommandEG extends EvergreenCommand {
 
     Runnable m_toRun;
 

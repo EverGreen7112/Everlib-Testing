@@ -2,8 +2,6 @@ package com.evergreen.everlib.utils;
 
 import com.evergreen.everlib.shuffleboard.constants.ConstantDouble;
 import com.evergreen.everlib.shuffleboard.constants.DashboardConstants;
-import com.evergreen.everlib.subsystems.SubsystemEG;
-import com.evergreen.everlib.subsystems.motors.subsystems.MotorSubsystem;
 
 import edu.wpi.first.wpilibj.controller.PIDController;
 
@@ -24,10 +22,6 @@ public class PIDSettings {
     private final ConstantDouble m_tolerance;
     /**Time between each calculation cycle */
     private final ConstantDouble m_period;
-    /**The controller to write the information into.*/
-    private final MotorSubsystem m_subsystem;
-
-    private final PIDType m_type;
 
     private final PIDController m_controller;
 
@@ -47,10 +41,10 @@ public class PIDSettings {
      * @param kF - The feed-forward constant.
      * @param period - The time between each controller update. 
     */
-    public PIDSettings(MotorSubsystem subsystem, PIDType type, double kP, double kI, double kD, 
+    public PIDSettings(String systemName, double kP, double kI, double kD, 
         double tolerance, double kF, double period) {
 
-        DashboardConstants.getInstance().pushd("/" + subsystem.getName() + "/PID");
+        DashboardConstants.getInstance().pushd("/" + systemName + "/PID");
 
         m_P = new ConstantDouble("kP", kP);
         m_I = new ConstantDouble("kI", kI);
@@ -58,17 +52,13 @@ public class PIDSettings {
         m_F = new ConstantDouble("kF", kF);
         
         m_tolerance = new ConstantDouble(
-            subsystem.getName() + "Tolerance", tolerance);
+            systemName + "Tolerance", tolerance);
         
         m_period = new ConstantDouble(
-            subsystem.getName() + "Period", period);   
+            systemName + "Period", period);   
 
         m_controller = new PIDController(kP, kI, kD, period);
         m_controller.setTolerance(tolerance);
-
-        m_subsystem = subsystem;
-        m_type = type;
-
         DashboardConstants.getInstance().popd();
     }
 
@@ -83,9 +73,9 @@ public class PIDSettings {
      * be satisfied?
      * @param kF - The feed-forward constant.
     */
-    public PIDSettings(MotorSubsystem subsystem, PIDType type, double kP, double kI, double kD, 
+    public PIDSettings(String systemName, double kP, double kI, double kD, 
         double tolerance, double kF) {
-            this(subsystem, type, kP, kI, kD, tolerance, kF, DEFAULT_PERIOD);
+            this(systemName, kP, kI, kD, tolerance, kF, DEFAULT_PERIOD);
     }
 
 
@@ -99,9 +89,9 @@ public class PIDSettings {
      * @param tolerance - the loop's tolerance; St what point away from the target should the loop
      * be satisfied?
     */
-    public PIDSettings(MotorSubsystem subsystem, PIDType type, double kP, double kI, double kD, 
+    public PIDSettings(String systemName, double kP, double kI, double kD, 
         double tolerance) {
-            this(subsystem, type, kP, kI, kD, tolerance, DEFAULT_F, DEFAULT_PERIOD);
+            this(systemName, kP, kI, kD, tolerance, DEFAULT_F, DEFAULT_PERIOD);
     }
 
     /**
@@ -113,8 +103,8 @@ public class PIDSettings {
      * @param kI - The integral constant
      * @param kD - The derivative constant.
     */
-    public PIDSettings(MotorSubsystem subsystem, PIDType type, double kP, double kI, double kD) {
-            this(subsystem, type, kP, kI, kD, DEFAULT_TOLEANCE, DEFAULT_F, DEFAULT_PERIOD);
+    public PIDSettings(String systemName, double kP, double kI, double kD) {
+            this(systemName, kP, kI, kD, DEFAULT_TOLEANCE, DEFAULT_F, DEFAULT_PERIOD);
     }
 
 
@@ -134,48 +124,56 @@ public class PIDSettings {
         return m_F.get();
     }
 
+
+    public void setP(double kP) {
+        m_P.setValue(kP);
+    }
+
+    public void setI(double kI) {
+        m_I.setValue(kI);
+    }
+
+    public void setD(double kD) {
+        m_D.setValue(kD);
+    }
+
+    public void setF(double kF) {
+        m_F.setValue(kF);
+
+    }
+
+    public void setTolerance(double tolerance) {
+        m_tolerance.setValue(tolerance);
+    }
+
+    public void setPID(double kP, double kI, double kD) {
+        setP(kP);
+        setI(kI);
+        setD(kD);   
+    }
+
+    public void setPID(double kP, double kI, double kD, double tolerance) {
+        setPID(kP, kI, kD);
+        setTolerance(tolerance);
+    }
+
+    public void setPID(double kP, double kI, double kD, double tolerance, double kF) {
+        setPID(kP, kI, kD, tolerance);
+        setF(kF);
+    }
+
     public double getTolerance() {
         return m_tolerance.get();
     }
 
-    public double getMeasurment() {
-        return m_type.mesureWith(m_subsystem);
-    }
 
     public double getPeriod() {
         return m_period.get();
     }
 
-    public void write(double power) {
-        m_subsystem.move(power);
-    }
 
     public PIDController getController() {
         return m_controller;
     }
 
-    public SubsystemEG getSubsystem() {
-        return m_subsystem;
-    }
-
-    @FunctionalInterface
-    private interface Mesurement {
-        public double mesure(MotorSubsystem subsystem);
-    }
-
-    public enum PIDType {
-        POSITION((system) -> system.getPosition()),
-        VELOCITY((system) -> system.getVelocity());/*,
-        ANGLE;*/
-
-        private Mesurement m_mesurement;
-
-        private PIDType(Mesurement mesurement) {
-            m_mesurement = mesurement;
-        }
-
-        public double mesureWith(MotorSubsystem system) {
-            return m_mesurement.mesure(system);
-        }
-    }
 }

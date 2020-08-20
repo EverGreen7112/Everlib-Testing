@@ -17,16 +17,27 @@ public class DashboardStreams extends Explorer {
 
     private static DashboardStreams m_instance;
 
+    /**
+     * DashboardStreams
+     */
     private DashboardStreams() {
         super("Streams Explorer");
     }
 
+    /**
+     * getInstance
+     * @return the instance of the class.
+     */
     public static DashboardStreams getInstance() {
-        if (m_instance == null) m_instance = new DashboardStreams();
+        if (m_instance == null) m_instance = new DashboardStreams(); // If this is the first time the instance is used, a new one is created
         return m_instance;
     }
 
-    private void log(LoggableData loggable) {
+    /**
+     * log
+     * @pa
+     */
+    public void log(LoggableData loggable) {
         String name = loggable.getKey();
         String key = pwd() + "/" + name;
 
@@ -73,7 +84,11 @@ public class DashboardStreams extends Explorer {
         popd();
     }
 
-
+    /**
+     * update
+     * Keeps all the loggable data updated with the dashboard.
+     * Should be in robot periodic in order to keep track with the loggable data in the dashboard. 
+     */
     public void update() {
         for (LoggableData loggableData: m_loggables) {
             loggableData.addToDashboard();

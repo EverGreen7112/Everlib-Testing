@@ -1,0 +1,190 @@
+#+TITLE:  Everlib TODO
+* PROJ Go over code [8%]
+** DONE Framework/Shuffleboard [1/1]
+- [X] Explorer
+** TODO Loggables [0/5]
+- [ ] LoggableData
+- [ ] LoggableObject
+- [ ] LoggableData Implementations - Negev
+- [ ] DashboardStreams - Peleg
+** TODO Constants [0/6]
+- [ ] Constant
+- [ ] ConstantBoolean
+- [ ] ConstantDouble
+- [ ] ConstantString
+- [ ] ConstantInt
+- [ ] DashboardConstants
+** TODO Constant Commands [0/4]
+- [ ] SetConstant
+- [ ] ToggleSwitch
+- [ ] SetConstantUntil
+- [ ] SetSwitch
+** TODO Framework/Commands [0/2]
+- [ ] CommandEG
+- [ ] InstantCommandEG
+** TODO Framework/Ranges [0/5]
+- [ ] Range
+- [ ] MaxLimit
+- [ ] DoubleLimit
+- [ ] Limitless
+- [ ] MinLimit
+** TODO OI [0/6]
+- [ ] Adjuster
+- [ ] F310GamePad
+- [ ] ExtremeProJoystick
+- [ ] GroupButtonBindings
+- [ ] JoystickEG
+- [ ] OIExceptions
+** TODO Sensor Classes [0/4]
+- [ ] DistanceSensorGroup
+- [ ] LaserSensor
+- [ ] DistanceSensor
+- [ ] EncoderEG
+** TODO Motor Subsystem Classes [0/4]
+- [ ] SubsystemEG
+- [ ] MotorController
+- [ ] MotorSubsystem
+- [ ] DriveTank
+** TODO Motor Subsystem Commands [0/6]
+- [ ] MoveMotorSystem
+- [ ] PIDSettings
+- [ ] RunPID
+- [ ] _RunPID
+- [ ] TankDrive
+- [ ] MotorSystemBangBang
+- [ ] SetMotorSystem
+** TODO Piston Subsystems [0/3]
+- [ ] TogglePistonSubsystem
+- [ ] SetPistonSubsystem
+- [ ] PistonSubsystem
+** TODO Framework/Structure [/]
+- [ ] Tree
+
+* PROJ Document [8%]
+** TODO Framework/Shuffleboard [0/1]
+- [ ] Explorer
+** TODO Loggables [0/5]
+- [ ] LoggableData
+- [ ] LoggableObject
+- [ ] LoggableData Implementations (only constructor)
+  + [ ] LoggableDouble
+  + [ ] LoggableBoolean
+  + [ ] LoggableString
+  + [ ] LoggableInt
+- [ ] DashboardStreams
+** TODO Constants [0/6]
+- [ ] Constant
+- [ ] ConstantBoolean
+- [ ] ConstantDouble
+- [ ] ConstantString
+- [ ] DashboardConstants
+- [ ] ConstantInt
+** DONE Constant Commands [4/4]
+- [X] SetConstant
+- [X] ToggleSwitch
+- [X] SetConstantUntil
+- [X] SetSwitch
+** TODO Framework/Commands [0/2]
+- [ ] CommandEG
+- [ ] InstantCommandEG
+** TODO Framework/Ranges [0/5]
+- [ ] Range
+- [ ] MaxLimit
+- [ ] DoubleLimit
+- [ ] Limitless
+- [ ] MinLimit
+** TODO OI [3/6]
+- [ ] Adjuster
+- [X] F310GamePad
+- [X] ExtremeProJoystick
+- [X] GroupButtonBindings
+- [ ] JoystickEG
+- [ ] OIExceptions
+** TODO Sensor Classes [0/4]
+- [ ] DistanceSensorGroup
+- [ ] LaserSensor
+- [ ] DistanceSensor
+- [ ] EncoderEG
+** TODO Motor Subsystem Classes [0/4]
+- [ ] SubsystemEG
+- [ ] MotorController
+- [ ] MotorSubsystem
+- [ ] DriveTank
+** TODO Motor Subsystem Commands [0/6]
+- [ ] SetMotorSystem
+- [ ] MoveMotorSystem
+- [ ] TankDrive
+- [ ] MotorSystemBangBang
+- [ ] PIDSettings
+- [ ] _RunPID
+- [ ] RunPID
+** TODO Piston Subsystems [0/3]
+- [ ] TogglePistonSubsystem
+- [ ] SetPistonSubsystem
+- [ ] PistonSubsystem
+** TODO Framework/Structure [0/1]
+- [ ] Tree
+* PROJ Test [0%]
+** TODO Framework/Shuffleboard [0/1]
+- [ ] Explorer
+** TODO Loggables [0/5]
+- [ ] LoggableData
+- [ ] LoggableObject
+- [ ] LoggableData Implementations
+  + [ ] LoggableDouble
+  + [ ] LoggableBoolean
+  + [ ] LoggableString
+  + [ ] LoggableInt
+- [ ] DashboardStreams
+** TODO Constants [0/6]
+- [ ] Constant
+- [ ] ConstantBoolean
+- [ ] ConstantDouble
+- [ ] ConstantString
+- [ ] DashboardConstants
+- [ ] ConstantInt
+** TODO Constant Commands [0/4]
+- [ ] SetConstant
+- [ ] ToggleSwitch
+- [ ] InstantCommandEG
+- [ ] SetConstantUntil
+** TODO Framework/Commands [0/2]
+- [ ] CommandEG
+- [ ] SetSwitch
+- [ ] Range
+** TODO Framework/Ranges [0/5]
+- [ ] MaxLimit
+- [ ] DoubleLimit
+- [ ] Limitless
+- [ ] MinLimit
+** TODO OI [0/6]
+- [ ] Adjuster
+- [ ] F310GamePad
+- [ ] ExtremeProJoystick
+- [ ] GroupButtonBindings
+- [ ] JoystickEG
+- [ ] OIExceptions
+** TODO Sensor Classes [0/4]
+- [ ] DistanceSensorGroup
+- [ ] LaserSensor
+- [ ] DistanceSensor
+- [ ] EncoderEG
+** TODO Motor Subsystem Classes [0/4]
+- [ ] SubsystemEG
+- [ ] MotorController
+- [ ] MotorSubsystem
+- [ ] DriveTank
+** TODO Motor Subsystem Commands [0/6]
+- [ ] SetMotorSystem
+- [ ] MoveMotorSystem
+- [ ] MotorSystemBangBang
+- [ ] TankDrive
+- [ ] PIDSettings
+- [ ] RunPID
+- [ ] _RunPID
+** TODO Piston Subsystems [0/3]
+- [ ] TogglePistonSubsystem
+- [ ] SetPistonSubsystem
+- [ ] PistonSubsystem
+** TODO Framework/Structure [0/1]
+- [ ] Tree

@@ -12,22 +12,27 @@ import edu.wpi.first.wpilibj.Joystick.AxisType;
 /**
  * DriveTank
  */
-public class DriveTank extends MotorSubsystem {
+public class DriveTrain extends MotorSubsystem {
 
-    public DriveTank(String name, MotorController leftMotors, MotorController rightMotors) {
+    public DriveTrain(String name, MotorController leftMotors, MotorController rightMotors) {
         super(name, leftMotors, rightMotors);
     }
 
-    public DriveTank(String name, MotorController leftMotors, MotorController rightMotors, DistanceSensor sensor) {
+    public DriveTrain(String name, MotorController leftMotors, MotorController rightMotors, DistanceSensor sensor) {
         super(name, leftMotors, rightMotors);
     }
 
-    public DriveTank(String name, DistanceSensor sensor, MotorController leftMotors, MotorController rightMotors) {
+    public DriveTrain(String name, DistanceSensor sensor, MotorController leftMotors, MotorController rightMotors) {
         super(name, leftMotors, rightMotors);
     }
 
     public void drive(double leftSpeed, double rightSpeed) {
         set(Map.of(0, leftSpeed, 1, rightSpeed));
+    }
+
+    @Override
+    public void rotate(double speed) {
+        set(0, speed);
     }
 
     public void setDefaultByJoystick(JoystickEG joystick, AxisType leftAxis, AxisType rightAxis) {

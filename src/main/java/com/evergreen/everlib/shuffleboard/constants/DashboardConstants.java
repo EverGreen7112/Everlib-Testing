@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.evergreen.everlib.shuffleboard.handlers.Explorer;
-import com.evergreen.everlib.subsystems.SubsystemEG;
+import com.evergreen.everlib.subsystems.EvergreenSubsystem;
 
 /**
  * DashboardConstants
@@ -48,7 +48,7 @@ public class DashboardConstants extends Explorer {
     }
 
 
-    public void startConstantsOf(SubsystemEG subsystem) {
+    public void startConstantsOf(EvergreenSubsystem subsystem) {
         cd("/" + subsystem.getName() + "/Constants");
     }
 
