@@ -83,7 +83,7 @@ public abstract class Constant {
         Explorer explorer = new Explorer("Temporary " + m_name + " Move Explorer", m_folder);
         explorer.cd(folder);
 
-        m_folder = explorer.pwd();
+        m_folder = explorer.pwd().substring(1);
         
         addToDashboard();
     }
