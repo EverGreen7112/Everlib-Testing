@@ -108,13 +108,15 @@ public abstract class Constant {
     }
 
     public void remove() {
-        if (wasAdded())
+        if (wasAdded()) {
             Preferences.getInstance().remove(getPath());
-        else
+            System.out.println(String.format("Removed Constant \"%s\" under %s", m_name, m_folder));
+        } else {
             System.out.println(String.format(
                 "Tried to remove constant \"%s\" from %s, but it was never added to the"
                 + " Shuffleboard in the first place! ", 
                 m_name, m_folder));
+        }
     }
 
     public boolean wasAdded() {
