@@ -136,7 +136,7 @@
   + [X] LoggableString
   + [X] LoggableInt
 - [X] DashboardStreams
-** TODO Constants [0/6]
+** DONE Constants [6/6]
 - [X] Constant
 - [X] ConstantBoolean
 - [X] ConstantDouble
