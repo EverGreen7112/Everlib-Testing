@@ -32,9 +32,10 @@ public class DashboardConstants extends Explorer {
 
     public void resetBoard()
     {
-        for (int i = 0; i < m_constants.size(); i++) {
-            m_constants.get(i).remove();
-            m_constants.remove(i);
+        for (Constant constant : m_constants) {
+            if (constant.wasAdded()) {
+                constant.remove();
+            }
         }
     }
 
