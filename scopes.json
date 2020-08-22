@@ -1,7 +1,7 @@
 {
     "oi":
     {
-        "JS": "joysticks"
+        "js": "joysticks"
     },
 
     "board":
@@ -25,8 +25,15 @@
         "ranges": "Range Classes"
     },
 
-    "base": "Base Frmework (CommandEG)",
+    "base": "Base Frmework",
 
-    "test": "Test & Main classes" 
+    "test": "Test & Main classes",
+
+    "org" : {
+        "scopes" : "Scopes file",
+        "todo" : "Tasks file",
+        "map" : "Roadmap file",
+        "conv" : "Conventions file"
+    }
 
 }

@@ -1,0 +1,20 @@
+
+* PROJ Chores
+** TODO Prettify Constant addToDashboard
+    Object Parameter can probably be avoided, given that they way it's called is identical ton the default.
+** TODO Prettify pwd()
+    Explorer pwd() produces unix-like path with the root /, which means it has to be cut whenever it's needed for the shufffleboard (for which root is an empty string). The current function is useful for debugging and the cd implementatioun, but a shuffleboard path function may be added.
+** TODO Use custom Network Tables instead of SmartDashboard and preferences
+    Create base classes for evergreen networktables (given there's room for improvement in the normal classses) and use them for the constants and  streams. This will allow easy creation of more network tables, if need be, and allow names other than Preferences or SmartDashboard. They also seem to use the unix-like path, which is useful.
+** TODO Implement DoubleLimit with MinLimit and MaxLimit
+    Using other classes in the implimintation should simplify the overall code and rely more on classes we need to test anyway, thus decreasing our overall testing workload. It should also make the code clearer, as it really is just an upper and a bottom limits.  
+* PROJ Bugixes
+* PROJ Features
+** TODO Disable networktables.ini
+    networktables.ini saves the current values on the shuffleboard preferences and resends them every time, even if they are not present in the current code. This tends to clutter the shuffleboard with unnecisary information and in general be extremely annoying. We can check if there's an init way to disable it, and worst-case-scenario just write directly to the file, presuming it's written when the constant is added.
+** TODO Throw Exceptions for failed constant actions
+    Failed constant actions print out failoures ratehr than throw an Exceptions. An exception might be preferable here, as prints are not very noticable while wrong constants can crash a code, and are somewhat likely with networktables.init adding old constants.
+** TODO Set EvergreenCommand switch key by Shuffleboard structure conventions
+    The conventions for shuffleboard loggables and constants are currently undetermined. Generally this is not an issue for the code, as names and paths are set manually, but the names for the switches of each command are hardcoded into the class EvergreenCommand. At the moment a placeholder "<command name> | <switch>" is used, but it should be changed when conventions are determined. 
+** TODO Create Constant Increment commands
+    There is a command for setting a double constant's value, and the number Constant classes have methods for percentage and absolute increment, but command classes are missing. Given that the original reasoning behind these classes and methods were things like buttons to increase the robot speed, it seems apropriate to add the increment methods as commands as well.

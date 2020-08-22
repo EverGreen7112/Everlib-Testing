@@ -124,53 +124,53 @@
 - [ ] PistonSubsystem
 ** TODO Framework/Structure [0/1]
 - [ ] Tree
-* PROJ Test [0%]
-** TODO Framework/Shuffleboard [0/1]
-- [ ] Explorer
-** TODO Loggables [0/5]
-- [ ] LoggableData
-- [ ] LoggableObject
-- [ ] LoggableData Implementations
-  + [ ] LoggableDouble
-  + [ ] LoggableBoolean
-  + [ ] LoggableString
-  + [ ] LoggableInt
-- [ ] DashboardStreams
+* PROJ Test [16%]
+** DONE Framework/Shuffleboard [1/1]
+- [X] Explorer
+** DONE Loggables [4/4]
+- [X] LoggableData
+- [X] LoggableObject
+- [X] LoggableData Implementations
+  + [X] LoggableDouble
+  + [X] LoggableBoolean
+  + [X] LoggableString
+  + [X] LoggableInt
+- [X] DashboardStreams
 ** TODO Constants [0/6]
-- [ ] Constant
-- [ ] ConstantBoolean
-- [ ] ConstantDouble
-- [ ] ConstantString
-- [ ] DashboardConstants
-- [ ] ConstantInt
+- [X] Constant
+- [X] ConstantBoolean
+- [X] ConstantDouble
+- [X] ConstantString
+- [X] DashboardConstants
+- [X] ConstantInt
 ** TODO Constant Commands [0/4]
 - [ ] SetConstant
+- [ ] SetSwitch
 - [ ] ToggleSwitch
-- [ ] InstantCommandEG
 - [ ] SetConstantUntil
 ** TODO Framework/Commands [0/2]
-- [ ] CommandEG
-- [ ] SetSwitch
-- [ ] Range
+- [ ] EvergreenCommand
+- [ ] InstantEvergreenCommand
 ** TODO Framework/Ranges [0/5]
+- [ ] Range
+- [ ] MinLimit
 - [ ] MaxLimit
 - [ ] DoubleLimit
 - [ ] Limitless
-- [ ] MinLimit
 ** TODO OI [0/6]
 - [ ] Adjuster
+- [ ] EvergreenJoystick
 - [ ] F310GamePad
 - [ ] ExtremeProJoystick
 - [ ] GroupButtonBindings
-- [ ] JoystickEG
 - [ ] OIExceptions
 ** TODO Sensor Classes [0/4]
 - [ ] DistanceSensorGroup
 - [ ] LaserSensor
 - [ ] DistanceSensor
-- [ ] EncoderEG
+- [ ] EvergreenEncoder
 ** TODO Motor Subsystem Classes [0/4]
-- [ ] SubsystemEG
+- [ ] EvergreenSubsystem
 - [ ] MotorController
 - [ ] MotorSubsystem
 - [ ] DriveTank
