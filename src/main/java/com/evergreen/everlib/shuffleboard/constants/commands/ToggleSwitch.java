@@ -18,7 +18,7 @@ import com.evergreen.everlib.utils.InstantEvergreenCommand;
 /**A command to toggle a shuffleboard {@link ConstantBoolean}.
  * @author Atai Ambus
 */
-public class ToggleSwitch extends InstantCommandEG {
+public class ToggleSwitch extends InstantEvergreenCommand {
   
   private String m_switchPath;
 

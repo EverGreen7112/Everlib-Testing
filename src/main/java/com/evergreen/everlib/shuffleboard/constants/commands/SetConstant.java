@@ -3,14 +3,14 @@ package com.evergreen.everlib.shuffleboard.constants.commands;
 import java.util.function.Supplier;
 
 import com.evergreen.everlib.shuffleboard.constants.ConstantDouble;
-import com.evergreen.everlib.utils.InstantCommandEG;
+import com.evergreen.everlib.utils.InstantEvergreenCommand;
 
 /**
  * A command to set a {@link ConstantDouble shuffleboard double constant} a certain value.
  * 
  * @author Atai Ambus
  */
-public class SetConstant extends InstantCommandEG {
+public class SetConstant extends InstantEvergreenCommand {
 
     /**
      * Constructs a new {@link SetConstant} command, which sets an input {@link ConstantDouble 
