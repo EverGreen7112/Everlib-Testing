@@ -44,6 +44,7 @@ public class Explorer implements LoggableObject {
             if (folder.equals("..")) {
                 m_workingDirectory = 
                     m_workingDirectory.substring(0, pwd().lastIndexOf('/') - 1);
+                
             }
 
             else if (!folder.equals(".")) {
@@ -62,6 +63,7 @@ public class Explorer implements LoggableObject {
     public String pwd() {
         return "/" + m_workingDirectory;
     }
+
 
     public void pushd(String path) {
         m_directoryStack.push(pwd());

@@ -37,4 +37,6 @@ public class SetConstant extends InstantCommandEG {
     public SetConstant(String name, ConstantDouble constant, Supplier<Double> valueSupplier) {
         super(name, () -> constant.setValue(valueSupplier.get()));
     }
+
+
 }

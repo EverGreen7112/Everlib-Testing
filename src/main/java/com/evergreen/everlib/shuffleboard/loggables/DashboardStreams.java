@@ -96,7 +96,7 @@ public class DashboardStreams extends Explorer {
      * Should be in robot periodic in order to keep track with the loggable data in the dashboard. 
      */
     public void update() {
-        for (LoggableData loggableData: m_loggables) {
+        for (LoggableData loggableData : m_loggables) {
             loggableData.addToDashboard();
         }
     }
