@@ -5,7 +5,7 @@ import java.util.List;
 import com.evergreen.everlib.shuffleboard.constants.ConstantBoolean;
 import com.evergreen.everlib.shuffleboard.loggables.LoggableData;
 import com.evergreen.everlib.shuffleboard.loggables.LoggableString;
-import com.evergreen.everlib.utils.InstantCommandEG;
+import com.evergreen.everlib.utils.InstantEvergreenCommand;
 
 /*----------------------------------------------------------------------------*/
 /* Copyright (c) 2018 FIRST. All Rights Reserved.                             */
@@ -36,9 +36,11 @@ public class ToggleSwitch extends InstantCommandEG {
 
   @Override
   public List<LoggableData> getLoggableData() {
-    return
+    List<LoggableData> res = super.getLoggableData();
+    res.addAll(
       List.of(new LoggableString(
-        getName() + "switch to toggle",
-        () -> m_switchPath));
+        "switch to toggle",
+        () -> m_switchPath)));
+    return res;
   }
 }

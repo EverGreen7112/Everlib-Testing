@@ -41,7 +41,7 @@ public class SetSwitch extends InstantCommandEG {
   public List<LoggableData> getLoggableData() {
     //Here - the path of the switch to set
       return List.of(new LoggableString(
-        getName() + "/switch to set",
+        "switch to set",
         () -> m_switchPath));
   }
 
