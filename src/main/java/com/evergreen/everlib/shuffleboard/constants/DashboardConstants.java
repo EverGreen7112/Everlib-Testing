@@ -50,7 +50,7 @@ public class DashboardConstants extends Explorer {
 
 
     public void startConstantsOf(EvergreenSubsystem subsystem) {
-        cd("/" + subsystem.getName() + "/Constants");
+        startConstantsOf(subsystem.getName());
     }
 
     public void startConstantsOf(String subsystemName) {
