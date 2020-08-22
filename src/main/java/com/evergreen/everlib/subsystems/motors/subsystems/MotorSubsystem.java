@@ -16,6 +16,7 @@ import com.evergreen.everlib.utils.PIDSettings;
 import com.evergreen.everlib.utils.ranges.Limitless;
 import com.evergreen.everlib.utils.ranges.Range;
 
+import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj2.command.Command;
 
 /**
@@ -149,10 +150,10 @@ public class MotorSubsystem extends EvergreenSubsystem {
         }
 
         for (int i = 0; i < m_angleSensors.size(); i++) {
-
+            Gyro sensor = m_angleSensors.getAt(i);
             loggables.addAll(List.of(
-                    new LoggableDouble("Angle Sensors/Angle/#" + i, m_angleSensors.getAt(i)::getAngle),
-                    new LoggableDouble("Angle Sensors/Velocity/#" + i, m_angleSensors.getAt(i)::getRate)
+                    new LoggableDouble("Angle Sensors/Angle/#" + i, sensor::getAngle),
+                    new LoggableDouble("Angle Sensors/Velocity/#" + i, sensor::getRate)
             ));
         }
 
