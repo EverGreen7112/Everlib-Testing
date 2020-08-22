@@ -40,7 +40,7 @@ public abstract class Tree extends TimedRobot {
 
     @Override
     public void robotPeriodic() {
-        DashboardStreams.update();
+        DashboardStreams.getInstance().update();
         update();
     }
 
@@ -49,7 +49,6 @@ public abstract class Tree extends TimedRobot {
         whenEnabled();
         test();
     }
-
 
     protected abstract void componentSetup();
     protected abstract void bindButtons();

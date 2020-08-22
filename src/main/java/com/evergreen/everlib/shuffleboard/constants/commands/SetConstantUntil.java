@@ -63,7 +63,7 @@ public class SetConstantUntil extends EvergreenCommand {
         return m_until.get();
     }
 
-    /**When the command ends (that is the condition is met) or get intterupted */
+    /**When the command ends (that is the condition is met) or gets intterupted, revert the constant baclk to its original value. */
     @Override
     public void end(boolean interrupted) {
         m_constant.setValue(m_initValue);

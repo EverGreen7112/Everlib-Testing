@@ -7,9 +7,6 @@ import java.util.Stack;
 import com.evergreen.everlib.shuffleboard.loggables.LoggableData;
 import com.evergreen.everlib.shuffleboard.loggables.LoggableObject;
 import com.evergreen.everlib.shuffleboard.loggables.LoggableString;
-import com.evergreen.everlib.structure.Tree;
-
-import edu.wpi.first.wpilibj.Joystick;
 
 /**
  * Explorer
@@ -31,6 +28,11 @@ public class Explorer implements LoggableObject {
         m_history.push("/");
     }
 
+    public Explorer(String name, String initDir) {
+        this(name);
+        cd(initDir);
+    }
+
     public void cd(String path) {
         if (path.startsWith("/")) {
             m_workingDirectory = "";
@@ -41,7 +43,8 @@ public class Explorer implements LoggableObject {
 
             if (folder.equals("..")) {
                 m_workingDirectory = 
-                    m_workingDirectory.substring(0, m_workingDirectory.lastIndexOf('/'));
+                    m_workingDirectory.substring(0, pwd().lastIndexOf('/') - 1);
+                
             }
 
             else if (!folder.equals(".")) {
@@ -60,6 +63,7 @@ public class Explorer implements LoggableObject {
     public String pwd() {
         return "/" + m_workingDirectory;
     }
+
 
     public void pushd(String path) {
         m_directoryStack.push(pwd());
@@ -96,5 +100,9 @@ public class Explorer implements LoggableObject {
 
     public void popHistory() {
         m_history.pop();
+    }
+
+    public boolean atRoot() {
+        return m_workingDirectory == "";
     }
 }

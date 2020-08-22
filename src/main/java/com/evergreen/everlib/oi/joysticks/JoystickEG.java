@@ -29,6 +29,9 @@ import edu.wpi.first.wpilibj.Joystick;
  * For more advance adjustments,this class contains an {@link Adjuster adjuster}
  * for each of the axes, which can be set using its
  * {@link #setAxisAdjuster(int, Adjuster)} method.
+ * <p>
+ * <p>
+ * It also allowes a quick disable with its {@link #kill()} method, which converts all outputs to 0.
  * 
  * @author Atai Ambus
  */
@@ -121,6 +124,7 @@ public class JoystickEG extends Joystick implements LoggableObject {
     public void setExponential() {
         m_exponential = true;
     }
+
 
     public void setInverted() {
         m_inverted = true;

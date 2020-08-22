@@ -31,7 +31,7 @@ public class SetSwitch extends InstantCommandEG {
    * @param value - The value to set the switches
    * @param switches - The switches to set.
    */
-  public SetSwitch(String name, boolean value, ConstantBoolean booleanSwitch) {
+  public SetSwitch(String name, ConstantBoolean booleanSwitch, boolean value) {
     super(name, () -> booleanSwitch.set(value));
     m_switchPath = booleanSwitch.getPath();
   }
@@ -41,7 +41,7 @@ public class SetSwitch extends InstantCommandEG {
   public List<LoggableData> getLoggableData() {
     //Here - the path of the switch to set
       return List.of(new LoggableString(
-        getName() + "/switch to set",
+        "switch to set",
         () -> m_switchPath));
   }
 

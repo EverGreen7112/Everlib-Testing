@@ -140,7 +140,7 @@ public class ExtremeProJoystick extends JoystickEG {
      * 
      * The buttons of each {@link ExtremeProJoystick} are divided thrice - once on the Z axis, 
      * into top (on top of the joystick and on its base), then in each top and bottom divided
-     * into back (closest to driver) and forward (furthest from driver). In the bottoms ection 
+     * into back (closest to driver) and forward (farthest from driver). In the bottoms ection 
      * it is divided more, to also a middle section (between forward and back). Each Y swction 
      * is divided once more - into Left and Right buttons (X axis.)
      * 

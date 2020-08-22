@@ -39,6 +39,20 @@ public class ConstantDouble extends Constant implements Supplier<Double> {
         reset();
     }
 
+
+    public void increaseAbsolute(double increaseBy) {
+        setValue(get() + increaseBy);
+    }
+
+    /**
+     * Increases the constants value in percentage, according to an input 100%.
+     * @param percentage - The percentage to rise
+     * @param maxValue - The 100% the percentage are a part of
+     */
+    public void increasePercentage(double percentage, int maxValue) {
+        setValue(get() + maxValue * percentage/100);
+    } 
+
     @Override
     public Double get() {
         return Preferences.getInstance().getDouble(getPath(), m_defaultVal);

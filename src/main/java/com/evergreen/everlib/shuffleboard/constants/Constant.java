@@ -39,19 +39,25 @@ public abstract class Constant {
                 getType(), m_name, m_folder));
         } 
         
+        else {
+            addToDashboard(value);
+            System.out.println(String.format("Added %s constant \"%s\" at %s - %s",
+                getType(), m_name, m_folder, value.toString()));
 
-        addToDashboard(value);
-        System.out.println(String.format("Added %s constant \"%s\" at %s - %s",
-            getType(), m_name, m_folder, value.toString()));
+            DashboardConstants.getInstance().addConstant(this);
+        }
 
-        DashboardConstants.getInstance().addConstant(this);
     }
 
     /**
      * @return the path to the current constanto on the shuffleboard (under Preferences).
      */
     public String getPath() {
-        return m_folder + "/" + m_name;
+        if (m_folder.equals("")) {
+            return m_name;
+        } else {
+            return m_folder + "/" + m_name;
+        }
     }
 
     /**
@@ -61,23 +67,23 @@ public abstract class Constant {
      */
     public void setPath(String path) {
         remove();
-        m_folder = path.substring(0, path.lastIndexOf('/'));
-        m_name = path.substring(path.lastIndexOf('/'), path.length());
+        m_folder = path.substring(1, path.lastIndexOf('/'));
+        m_name = path.substring(path.lastIndexOf('/') + 1, path.length());
         addToDashboard();
     }
 
 
     /**
-     * Moves the constant to a folder - as per unix
-     * @param folder
+     * Moves the constant to a folder, with respect to standart path syntax (., .. and /)
+     * @param folder, 
      */
     public void move(String folder) {
         remove();
         
-        Explorer explorer = new Explorer(m_folder);
+        Explorer explorer = new Explorer("Temporary " + m_name + " Move Explorer", m_folder);
         explorer.cd(folder);
 
-        m_folder = explorer.pwd();
+        m_folder = explorer.pwd().substring(1);
         
         addToDashboard();
     }
@@ -102,13 +108,15 @@ public abstract class Constant {
     }
 
     public void remove() {
-        if (wasAdded())
+        if (wasAdded()) {
             Preferences.getInstance().remove(getPath());
-        else
+            System.out.println(String.format("Removed Constant \"%s\" under %s", m_name, m_folder));
+        } else {
             System.out.println(String.format(
                 "Tried to remove constant \"%s\" from %s, but it was never added to the"
                 + " Shuffleboard in the first place! ", 
                 m_name, m_folder));
+        }
     }
 
     public boolean wasAdded() {
