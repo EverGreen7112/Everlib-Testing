@@ -28,6 +28,11 @@ public class Explorer implements LoggableObject {
         m_history.push("/");
     }
 
+    public Explorer(String name, String initDir) {
+        this(name);
+        cd(initDir);
+    }
+
     public void cd(String path) {
         if (path.startsWith("/")) {
             m_workingDirectory = "";

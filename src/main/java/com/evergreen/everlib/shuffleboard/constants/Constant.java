@@ -80,7 +80,7 @@ public abstract class Constant {
     public void move(String folder) {
         remove();
         
-        Explorer explorer = new Explorer(m_folder);
+        Explorer explorer = new Explorer("Temporary " + m_name + " Move Explorer", m_folder);
         explorer.cd(folder);
 
         m_folder = explorer.pwd();
