@@ -31,7 +31,7 @@ public abstract class EvergreenCommand extends CommandBase implements LoggableOb
      */
     public EvergreenCommand(String name) {
         setName(name);
-        m_commandSwitch = new ConstantBoolean(name + "/switch");
+        m_commandSwitch = new ConstantBoolean(name + " | Switch");
     }
 
     
