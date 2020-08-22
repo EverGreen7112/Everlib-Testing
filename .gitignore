@@ -163,3 +163,9 @@ imgui.ini
 *.bin
 
 *.lock
+
+networktables.ini
+
+networktables.ini.bak
+
+*.ini
