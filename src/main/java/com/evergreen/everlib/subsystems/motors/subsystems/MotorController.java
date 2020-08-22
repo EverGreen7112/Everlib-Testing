@@ -40,7 +40,7 @@ public class MotorController implements SpeedController, LoggableObject {
      * A list of all motors this objects controlls.
       */
     private final ArrayList<SpeedController> m_motors = new ArrayList<>();
-    private final List<EncoderEG> m_encoders = new ArrayList<>();
+    private final List<EvergreenEncoder> m_encoders = new ArrayList<>();
     private final String m_name;
 
 
