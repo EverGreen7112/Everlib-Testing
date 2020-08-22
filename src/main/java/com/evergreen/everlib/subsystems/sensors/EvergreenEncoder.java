@@ -103,7 +103,7 @@ public class EvergreenEncoder extends DistanceSensor {
 
     @Override
     protected double _getDistance() {
-        return getPosition();
+        return m_ticksSupplier.get() * m_distancePerPulse;
     }
 
     @Override

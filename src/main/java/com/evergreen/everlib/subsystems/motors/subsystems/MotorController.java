@@ -40,7 +40,7 @@ public class MotorController implements SpeedController, LoggableObject {
      * A list of all motors this objects controlls.
       */
     private final ArrayList<SpeedController> m_motors = new ArrayList<>();
-    private final List<EncoderEG> m_encoders = new ArrayList<>();
+    private final List<EvergreenEncoder> m_encoders = new ArrayList<>();
     private final String m_name;
 
 
@@ -218,7 +218,7 @@ public class MotorController implements SpeedController, LoggableObject {
         for (int i = 0; i < getEncoders().size(); i++) {
             result.add(new LoggableDouble("Encoders/Ticks/#" + i, getEncoders().get(i)::getTicks));
             result.add(new LoggableDouble("Encoders/Distance/#" + i, getEncoders().get(i)::getPosition));
-            result.add(new LoggableDouble("Encoders/Speed/#" + i, getEncoders().get(i)::getSpeed));
+            result.add(new LoggableDouble("Encoders/Speed/#" + i, getEncoders().get(i)::getVelocity));
         }
 
         return result;
