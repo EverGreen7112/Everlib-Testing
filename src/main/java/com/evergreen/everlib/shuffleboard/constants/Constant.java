@@ -53,7 +53,11 @@ public abstract class Constant {
      * @return the path to the current constanto on the shuffleboard (under Preferences).
      */
     public String getPath() {
-        return m_folder + "/" + m_name;
+        if (m_folder.equals("")) {
+            return m_name;
+        } else {
+            return m_folder + "/" + m_name;
+        }
     }
 
     /**
