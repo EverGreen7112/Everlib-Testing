@@ -33,8 +33,7 @@ public class ConstantInt extends Constant implements Supplier<Integer> {
     }
 
     public void increaseAbsolute(int increaseBy) {
-        m_defaultVal += increaseBy;
-        addToDashboard();
+        setValue(get() + increaseBy);
     }
 
     /**
@@ -43,8 +42,7 @@ public class ConstantInt extends Constant implements Supplier<Integer> {
      * @param maxValue - The 100% the percentage are a part of
      */
     public void increasePercentage(int percentage, int maxValue) {
-        m_defaultVal += maxValue * (percentage / 100);
-        addToDashboard();
+        setValue(get() + maxValue * percentage/100);
     } 
 
     public void setValue(int newValue) {
