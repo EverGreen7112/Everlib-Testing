@@ -27,6 +27,13 @@
 
     "base": "Base Frmework (CommandEG)",
 
-    "test": "Test & Main classes" 
+    "test": "Test & Main classes",
+
+    "org" : {
+        "scopes" : "Scopes file",
+        "todo" : "Tasks file",
+        "map" : "Roadmap file",
+        "conv" : "Conventions file"
+    }
 
 }
