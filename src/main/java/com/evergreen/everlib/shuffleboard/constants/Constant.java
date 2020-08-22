@@ -39,12 +39,14 @@ public abstract class Constant {
                 getType(), m_name, m_folder));
         } 
         
+        else {
+            addToDashboard(value);
+            System.out.println(String.format("Added %s constant \"%s\" at %s - %s",
+                getType(), m_name, m_folder, value.toString()));
 
-        addToDashboard(value);
-        System.out.println(String.format("Added %s constant \"%s\" at %s - %s",
-            getType(), m_name, m_folder, value.toString()));
+            DashboardConstants.getInstance().addConstant(this);
+        }
 
-        DashboardConstants.getInstance().addConstant(this);
     }
 
     /**
