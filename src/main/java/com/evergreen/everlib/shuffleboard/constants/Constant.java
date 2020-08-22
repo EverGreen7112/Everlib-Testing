@@ -67,8 +67,8 @@ public abstract class Constant {
      */
     public void setPath(String path) {
         remove();
-        m_folder = path.substring(0, path.lastIndexOf('/'));
-        m_name = path.substring(path.lastIndexOf('/'), path.length());
+        m_folder = path.substring(1, path.lastIndexOf('/'));
+        m_name = path.substring(path.lastIndexOf('/') + 1, path.length());
         addToDashboard();
     }
 
