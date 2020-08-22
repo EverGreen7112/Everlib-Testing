@@ -94,4 +94,8 @@ public class Explorer implements LoggableObject {
     public void popHistory() {
         m_history.pop();
     }
+
+    public boolean atRoot() {
+        return m_workingDirectory == "";
+    }
 }

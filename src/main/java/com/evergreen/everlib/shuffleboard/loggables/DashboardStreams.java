@@ -39,7 +39,13 @@ public class DashboardStreams extends Explorer {
      */
     public void log(LoggableData loggable) {
         String name = loggable.getKey();
-        String key = pwd() + "/" + name;
+        String key;
+
+        if (atRoot()) {
+            key = name;
+        } else {
+            key  = pwd().substring(1) + "/" + name;
+        }
 
         if (!SmartDashboard.containsKey(key)) {
             loggable.setKey(key);
