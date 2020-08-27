@@ -6,7 +6,11 @@
 
     "board":
     {
-        "consts": "Shuffleboard Constants",
+        "consts": {
+            "base" : "Constants Classes",
+            "comm" : "Constant Commands"
+        },
+
         "logs": "Shuffleboard Streams",
         "handle": "Shuffleboard Handlers"
     },
