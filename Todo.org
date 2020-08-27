@@ -63,15 +63,15 @@
 * PROJ Document [8%]
 ** TODO Framework/Shuffleboard [0/1]
 - [ ] Explorer
-** TODO Loggables [0/5]
-- [ ] LoggableData
-- [ ] LoggableObject
-- [ ] LoggableData Implementations (only constructor)
-  + [ ] LoggableDouble
-  + [ ] LoggableBoolean
-  + [ ] LoggableString
-  + [ ] LoggableInt
-- [ ] DashboardStreams
+** DONE Loggables [5/5]
+- [X] LoggableData
+- [X] LoggableObject
+- [X] LoggableData Implementations (only constructor)
+  + [X] LoggableDouble
+  + [X] LoggableBoolean
+  + [X] LoggableString
+  + [X] LoggableInt
+- [X] DashboardStreams
 ** TODO Constants [0/6]
 - [ ] Constant
 - [ ] ConstantBoolean
@@ -136,21 +136,21 @@
   + [X] LoggableString
   + [X] LoggableInt
 - [X] DashboardStreams
-** TODO Constants [0/6]
+** DONE Constants [6/6]
 - [X] Constant
 - [X] ConstantBoolean
 - [X] ConstantDouble
 - [X] ConstantString
 - [X] DashboardConstants
 - [X] ConstantInt
+** DONE Framework/Commands [2/2]
+- [X] EvergreenCommand
+- [X] InstantEvergreenCommand
 ** TODO Constant Commands [0/4]
 - [ ] SetConstant
 - [ ] SetSwitch
 - [ ] ToggleSwitch
 - [ ] SetConstantUntil
-** TODO Framework/Commands [0/2]
-- [ ] EvergreenCommand
-- [ ] InstantEvergreenCommand
 ** TODO Framework/Ranges [0/5]
 - [ ] Range
 - [ ] MinLimit

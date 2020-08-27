@@ -5,7 +5,7 @@ import java.util.List;
 import com.evergreen.everlib.shuffleboard.constants.ConstantBoolean;
 import com.evergreen.everlib.shuffleboard.loggables.LoggableData;
 import com.evergreen.everlib.shuffleboard.loggables.LoggableString;
-import com.evergreen.everlib.utils.InstantCommandEG;
+import com.evergreen.everlib.utils.InstantEvergreenCommand;
 
 /*----------------------------------------------------------------------------*/
 /* Copyright (c) 2018 FIRST. All Rights Reserved.                             */
@@ -20,7 +20,7 @@ import com.evergreen.everlib.utils.InstantCommandEG;
  * 
  * @author Atai Ambus
 */
-public class SetSwitch extends InstantCommandEG {
+public class SetSwitch extends InstantEvergreenCommand {
 
   private String m_switchPath;
 

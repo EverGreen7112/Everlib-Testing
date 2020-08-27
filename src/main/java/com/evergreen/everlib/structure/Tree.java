@@ -7,6 +7,8 @@ import com.evergreen.everlib.shuffleboard.loggables.DashboardStreams;
 import com.evergreen.everlib.subsystems.EvergreenCommand;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
+
 
 /**
  * Tree
@@ -41,6 +43,7 @@ public abstract class Tree extends TimedRobot {
     @Override
     public void robotPeriodic() {
         DashboardStreams.getInstance().update();
+        CommandScheduler.getInstance().run();
         update();
     }
 

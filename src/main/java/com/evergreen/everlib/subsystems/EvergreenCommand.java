@@ -3,14 +3,15 @@ package com.evergreen.everlib.subsystems;
 import java.util.List;
 
 import com.evergreen.everlib.shuffleboard.constants.ConstantBoolean;
+import com.evergreen.everlib.shuffleboard.loggables.LoggableBoolean;
 import com.evergreen.everlib.shuffleboard.loggables.LoggableData;
 import com.evergreen.everlib.shuffleboard.loggables.LoggableInt;
 import com.evergreen.everlib.shuffleboard.loggables.LoggableObject;
-
-import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.Subsystem;
+import com.evergreen.everlib.shuffleboard.loggables.LoggableString;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
+import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Subsystem;
 
 /**
  * The basic command for the Eververgreen Framework.
@@ -22,7 +23,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
 public abstract class EvergreenCommand extends CommandBase implements LoggableObject {
     private ConstantBoolean m_commandSwitch;
 
+    private int m_scheduleCounter = 0;
     private int m_ranCounter = 0;
+    int m_interruptCounter = 0;
     
     /**
      * Constructs a new {@link EvergreenCommand} with input name, and without logging it in the shuffleboard
@@ -31,7 +34,7 @@ public abstract class EvergreenCommand extends CommandBase implements LoggableOb
      */
     public EvergreenCommand(String name) {
         setName(name);
-        m_commandSwitch = new ConstantBoolean(name + "/switch");
+        m_commandSwitch = new ConstantBoolean(name + " | Switch");
     }
 
     
@@ -53,19 +56,29 @@ public abstract class EvergreenCommand extends CommandBase implements LoggableOb
         m_commandSwitch = new ConstantBoolean(subsystems[0].getName() + "/command switches/" + name);
     }
 
-    /**Schedules this command, defaulting to interruptible, as long both this an*/
+    /**Schedules this command, defaulting to interruptible, 
+     * as long both it and all of its required commands are enabled.*/
     @Override
-    public void schedule() {
-        m_ranCounter++;
+    public void schedule(boolean interruptible) {
+        
+        m_scheduleCounter++;
+        
 
-        if (canStart())
-            super.schedule();
 
-        for (Subsystem subsystem : m_requirements) {
-            if (subsystem instanceof EvergreenSubsystem) {
-                ((EvergreenSubsystem)subsystem).useWith(this);
+        if (canStart()) {
+            for (Subsystem subsystem : m_requirements) {
+                if (subsystem instanceof EvergreenSubsystem) {
+                    EvergreenSubsystem sub = (EvergreenSubsystem)subsystem;
+                    boolean allowed = sub.useWith(this, interruptible);
+                    if (!allowed) {
+                        return;
+                    }
+                }
             }
+            m_ranCounter++;
+            super.schedule(interruptible);
         }
+        
     }
 
 
@@ -118,15 +131,54 @@ public abstract class EvergreenCommand extends CommandBase implements LoggableOb
 
     @Override
     public List<LoggableData> getLoggableData() {
-        return List.of(new LoggableData[] {
-            new LoggableInt(getName() + "/Ran Counter", () -> m_ranCounter)
+
+        String[] evergreenRequirements;
+        
+        if (m_requirements.size() == 0) {
+            evergreenRequirements = new String[] {"None"};
+        } else {
+            evergreenRequirements = 
+                (String[])m_requirements.stream()
+                .filter(v -> v instanceof EvergreenSubsystem)
+                .map(v -> ((EvergreenSubsystem)v).getName())
+                .toArray(String[]::new);
+        }
+
+        List<LoggableData> res = List.of(new LoggableData[] {
+            new LoggableInt("Schedules", () -> m_scheduleCounter),
+            new LoggableInt("Runs", () -> m_ranCounter),
+            new LoggableInt("Schedule Failures", () -> m_scheduleCounter - m_ranCounter),
+            new LoggableInt("Interruptions", () -> m_interruptCounter),
+            new LoggableBoolean("Active", this::canStart),
+            new LoggableBoolean("Switch", m_commandSwitch::get),
+            new LoggableString("Requirements", () -> String.join(", ", evergreenRequirements))
         });
+
+        for (Subsystem requirement : m_requirements) {
+            if (requirement instanceof EvergreenSubsystem) {
+                EvergreenSubsystem evergreenRequirement = (EvergreenSubsystem)requirement;
+                res.addAll(List.of( 
+                    new LoggableBoolean(
+                        "Requirement" + evergreenRequirement.getName() + " Active",
+                        () -> evergreenRequirement.getSwitchState())
+                ));
+                
+            }
+        }
+
+        return res;
     }
 
     public void addRequirements(EvergreenSubsystem... subsystems ) {
         super.addRequirements(subsystems);
     }
     
+    @Override
+    public void cancel() {
+        m_interruptCounter++;
+        super.cancel();
+    }
+
 
     @Override
     public void initSendable(SendableBuilder builder) { }
