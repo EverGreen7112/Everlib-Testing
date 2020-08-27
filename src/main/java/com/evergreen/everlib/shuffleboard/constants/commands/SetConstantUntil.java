@@ -52,15 +52,14 @@ public class SetConstantUntil extends SetConstant {
         this(name, constant, value, () -> false);
     }
 
-    /**When the command starts - set the command the input value */
-    @Override
-    /**When the input condition is met - end the command */
+    /**When the input condition is met - end the command*/
     @Override
     public boolean isFinished() {
         return m_until.get();
     }
 
-    /**When the command ends (that is the condition is met) or gets intterupted, revert the constant baclk to its original value. */
+    /**When the command ends (that is, the condition is met) or gets interrupted, 
+     * revert the constant back to its original value. */
     @Override
     public void end(boolean interrupted) {
         m_constant.setValue(m_initValue);
