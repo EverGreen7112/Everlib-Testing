@@ -12,15 +12,13 @@ import com.evergreen.everlib.subsystems.EvergreenCommand;
  * 
  * @author Atai Ambus
  */
-public class SetConstantUntil extends EvergreenCommand {
+public class SetConstantUntil extends SetConstant {
     /**The {@link #isFinished()} condition.*/
     Supplier<Boolean> m_until;
     /**The constant to set.*/
     ConstantDouble m_constant;
     /**The value to revert the cosntant back to*/
     double m_initValue;
-    /**The value to set the constant to*/
-    double m_valueToSet;
 
     /**
      * Constructs a new {@link SetConstantUntil} command, setting an input {@link ConstantDouble}
@@ -33,10 +31,10 @@ public class SetConstantUntil extends EvergreenCommand {
      */
     public SetConstantUntil(String name, 
         ConstantDouble constant, Supplier<Double> value, Supplier<Boolean> until) {
-        super(name);
+        super(name, constant, value);
         m_constant = constant;
         m_initValue = constant.get();
-        m_valueToSet = value.get();
+        m_until = until;
     }
 
     /**
@@ -53,10 +51,6 @@ public class SetConstantUntil extends EvergreenCommand {
 
     /**When the command starts - set the command the input value */
     @Override
-    public void initialize() {
-        m_constant.setValue(m_valueToSet);
-    }
-
     /**When the input condition is met - end the command */
     @Override
     public boolean isFinished() {
