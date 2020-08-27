@@ -1,8 +1,11 @@
 package com.evergreen.everlib.shuffleboard.constants.commands;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
 
 import com.evergreen.everlib.shuffleboard.constants.ConstantBoolean;
+import com.evergreen.everlib.shuffleboard.loggables.LoggableBoolean;
 import com.evergreen.everlib.shuffleboard.loggables.LoggableData;
 import com.evergreen.everlib.shuffleboard.loggables.LoggableString;
 import com.evergreen.everlib.utils.InstantEvergreenCommand;
@@ -23,6 +26,8 @@ import com.evergreen.everlib.utils.InstantEvergreenCommand;
 public class SetSwitch extends InstantEvergreenCommand {
 
   private String m_switchPath;
+  private String m_switchName;
+  private Supplier<Boolean> m_valueSupplier;
 
   /**
    * Constructs a command that sets the input switches at input value
@@ -32,17 +37,27 @@ public class SetSwitch extends InstantEvergreenCommand {
    * @param switches - The switches to set.
    */
   public SetSwitch(String name, ConstantBoolean booleanSwitch, boolean value) {
-    super(name, () -> booleanSwitch.set(value));
-    m_switchPath = booleanSwitch.getPath();
+    this(name, booleanSwitch, () -> value);
   }
 
 
+  public SetSwitch(String name, ConstantBoolean booleanSwitch, Supplier<Boolean> valueSupplier) {
+    super(name, () -> booleanSwitch.set(valueSupplier.get()));
+    m_switchPath = booleanSwitch.getPath();
+    m_switchName = booleanSwitch.getName();
+    m_valueSupplier = valueSupplier;
+  }
+
   @Override
   public List<LoggableData> getLoggableData() {
-    //Here - the path of the switch to set
-      return List.of(new LoggableString(
-        "switch to set",
-        () -> m_switchPath));
+      ArrayList<LoggableData> res = new ArrayList<>(super.getLoggableData());
+      res.addAll(List.of(
+        new LoggableString("Taregt Path", () -> m_switchPath),
+        new LoggableString("Target Name", () -> m_switchName),
+        new LoggableBoolean("Value to Set", m_valueSupplier)
+      ));
+
+      return res;
   }
 
 }

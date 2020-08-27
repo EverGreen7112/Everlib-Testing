@@ -1,9 +1,12 @@
 package com.evergreen.everlib.shuffleboard.constants.commands;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Supplier;
 
 import com.evergreen.everlib.shuffleboard.constants.ConstantDouble;
-import com.evergreen.everlib.subsystems.EvergreenCommand;
+import com.evergreen.everlib.shuffleboard.loggables.LoggableBoolean;
+import com.evergreen.everlib.shuffleboard.loggables.LoggableData;
 
 /**
  * A command to set a {@link ConstantDouble} a certain value,
@@ -12,15 +15,13 @@ import com.evergreen.everlib.subsystems.EvergreenCommand;
  * 
  * @author Atai Ambus
  */
-public class SetConstantUntil extends EvergreenCommand {
+public class SetConstantUntil extends SetConstant {
     /**The {@link #isFinished()} condition.*/
     Supplier<Boolean> m_until;
     /**The constant to set.*/
     ConstantDouble m_constant;
     /**The value to revert the cosntant back to*/
     double m_initValue;
-    /**The value to set the constant to*/
-    double m_valueToSet;
 
     /**
      * Constructs a new {@link SetConstantUntil} command, setting an input {@link ConstantDouble}
@@ -33,10 +34,10 @@ public class SetConstantUntil extends EvergreenCommand {
      */
     public SetConstantUntil(String name, 
         ConstantDouble constant, Supplier<Double> value, Supplier<Boolean> until) {
-        super(name);
+        super(name, constant, value);
         m_constant = constant;
         m_initValue = constant.get();
-        m_valueToSet = value.get();
+        m_until = until;
     }
 
     /**
@@ -51,21 +52,25 @@ public class SetConstantUntil extends EvergreenCommand {
         this(name, constant, value, () -> false);
     }
 
-    /**When the command starts - set the command the input value */
-    @Override
-    public void initialize() {
-        m_constant.setValue(m_valueToSet);
-    }
-
-    /**When the input condition is met - end the command */
+    /**When the input condition is met - end the command*/
     @Override
     public boolean isFinished() {
         return m_until.get();
     }
 
-    /**When the command ends (that is the condition is met) or gets intterupted, revert the constant baclk to its original value. */
+    /**When the command ends (that is, the condition is met) or gets interrupted, 
+     * revert the constant back to its original value. */
     @Override
     public void end(boolean interrupted) {
         m_constant.setValue(m_initValue);
+    }
+
+    @Override
+    public List<LoggableData> getLoggableData() {
+        ArrayList<LoggableData> res = new ArrayList<>(super.getLoggableData());
+        res.addAll(List.of(
+            new LoggableBoolean("Revert Condition", m_until)
+        ));
+        return res;
     }
 }

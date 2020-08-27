@@ -123,6 +123,9 @@ public abstract class Constant {
         return Preferences.getInstance().containsKey(getPath());
     }
 
+    public String getName() {
+        return m_name;
+    }
 
     public abstract String getType();
 }

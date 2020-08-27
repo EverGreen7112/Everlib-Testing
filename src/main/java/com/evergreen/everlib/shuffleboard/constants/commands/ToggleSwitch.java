@@ -1,11 +1,6 @@
 package com.evergreen.everlib.shuffleboard.constants.commands;
 
-import java.util.List;
-
 import com.evergreen.everlib.shuffleboard.constants.ConstantBoolean;
-import com.evergreen.everlib.shuffleboard.loggables.LoggableData;
-import com.evergreen.everlib.shuffleboard.loggables.LoggableString;
-import com.evergreen.everlib.utils.InstantEvergreenCommand;
 
 /*----------------------------------------------------------------------------*/
 /* Copyright (c) 2018 FIRST. All Rights Reserved.                             */
@@ -18,9 +13,8 @@ import com.evergreen.everlib.utils.InstantEvergreenCommand;
 /**A command to toggle a shuffleboard {@link ConstantBoolean}.
  * @author Atai Ambus
 */
-public class ToggleSwitch extends InstantEvergreenCommand {
+public class ToggleSwitch extends SetSwitch {
   
-  private String m_switchPath;
 
   /**
    * Constructs a {@link ToggleSwitch} command, which toggles an input
@@ -30,17 +24,7 @@ public class ToggleSwitch extends InstantEvergreenCommand {
    * @param booleanSwitch - The switch to toggle.
    */
   public ToggleSwitch(String name, ConstantBoolean booleanSwitch) {
-    super(name, () -> booleanSwitch.toggle());
-    m_switchPath = booleanSwitch.getPath();
+    super(name, booleanSwitch, () -> !booleanSwitch.get());
   }
 
-  @Override
-  public List<LoggableData> getLoggableData() {
-    List<LoggableData> res = super.getLoggableData();
-    res.addAll(
-      List.of(new LoggableString(
-        "switch to toggle",
-        () -> m_switchPath)));
-    return res;
-  }
 }

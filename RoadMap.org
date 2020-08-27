@@ -8,6 +8,8 @@
     Create base classes for evergreen networktables (given there's room for improvement in the normal classses) and use them for the constants and  streams. This will allow easy creation of more network tables, if need be, and allow names other than Preferences or SmartDashboard. They also seem to use the unix-like path, which is useful.
 ** TODO Implement DoubleLimit with MinLimit and MaxLimit
     Using other classes in the implimintation should simplify the overall code and rely more on classes we need to test anyway, thus decreasing our overall testing workload. It should also make the code clearer, as it really is just an upper and a bottom limits.  
+** TODO Create abstract classes for Shuffleboard commands
+    SetSwitch and SetConstant retain a very similar structure and loggable data. It would be more efficent and clearer to abstract them into a simpler command (together with SetConstantUntil) and extend it for each data type. 
 * PROJ Bugixes
 * PROJ Features
 ** TODO Disable networktables.ini

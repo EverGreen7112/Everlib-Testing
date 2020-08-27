@@ -6,7 +6,11 @@
 
     "board":
     {
-        "consts": "Shuffleboard Constants",
+        "consts": {
+            "base" : "Constants Classes",
+            "comm" : "Constant Commands"
+        },
+
         "logs": "Shuffleboard Streams",
         "handle": "Shuffleboard Handlers"
     },
@@ -25,7 +29,7 @@
         "ranges": "Range Classes"
     },
 
-    "base": "Base Frmework",
+    "base": "Base Framework",
 
     "test": "Test & Main classes",
 
