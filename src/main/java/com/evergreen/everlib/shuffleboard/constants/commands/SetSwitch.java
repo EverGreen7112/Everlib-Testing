@@ -32,7 +32,8 @@ public class SetSwitch extends InstantEvergreenCommand {
    * @param switches - The switches to set.
    */
   public SetSwitch(String name, ConstantBoolean booleanSwitch, boolean value) {
-    super(name, () -> booleanSwitch.set(value));
+    this(name, booleanSwitch, () -> value);
+  }
 
 
   public SetSwitch(String name, ConstantBoolean booleanSwitch, Supplier<Boolean> valueSupplier) {

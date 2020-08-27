@@ -21,7 +21,7 @@ public class SetConstant extends InstantEvergreenCommand {
      * @param value - The value to set it
      */
     public SetConstant(String name, ConstantDouble constant, double value) {
-        super(name, () -> constant.setValue(value));
+        this(name, constant, () -> value);
     }
 
 
