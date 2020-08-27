@@ -1,9 +1,12 @@
 package com.evergreen.everlib.shuffleboard.constants.commands;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Supplier;
 
 import com.evergreen.everlib.shuffleboard.constants.ConstantDouble;
-import com.evergreen.everlib.subsystems.EvergreenCommand;
+import com.evergreen.everlib.shuffleboard.loggables.LoggableBoolean;
+import com.evergreen.everlib.shuffleboard.loggables.LoggableData;
 
 /**
  * A command to set a {@link ConstantDouble} a certain value,
@@ -61,5 +64,14 @@ public class SetConstantUntil extends SetConstant {
     @Override
     public void end(boolean interrupted) {
         m_constant.setValue(m_initValue);
+    }
+
+    @Override
+    public List<LoggableData> getLoggableData() {
+        ArrayList<LoggableData> res = new ArrayList<>(super.getLoggableData());
+        res.addAll(List.of(
+            new LoggableBoolean("Revert Condition", m_until)
+        ));
+        return res;
     }
 }
