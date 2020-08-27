@@ -30,6 +30,7 @@ public abstract class EvergreenSubsystem extends SubsystemBase implements Except
         new AngleSensorGroup(getName() + "/Angle Sensor");
         
     protected EvergreenCommand m_currentlyUsedBy;
+    protected boolean m_currentCommandInterruptable  = true;
 
 
     public EvergreenSubsystem(String name) {
@@ -75,8 +76,20 @@ public abstract class EvergreenSubsystem extends SubsystemBase implements Except
             + ", but it does not have a distance sensor!");
     }
 
-    void useWith(EvergreenCommand command) {
-        m_currentlyUsedBy = command;
+    boolean useWith(EvergreenCommand command, boolean interruptible) {
+        
+        if (m_currentlyUsedBy == null ) {
+            m_currentlyUsedBy = command;
+        } else if (m_currentCommandInterruptable) {
+            m_currentlyUsedBy.m_interruptCounter++;
+            m_currentCommandInterruptable = interruptible;
+            m_currentlyUsedBy = command;
+        } else {
+            return false;
+        }
+        
+        return true;
+        
     }
 
     public double getVelocity() throws SensorDoesNotExistException {

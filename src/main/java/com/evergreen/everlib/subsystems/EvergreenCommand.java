@@ -22,7 +22,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
 public abstract class EvergreenCommand extends CommandBase implements LoggableObject {
     private ConstantBoolean m_commandSwitch;
 
+    private int m_scheduleCounter = 0;
     private int m_ranCounter = 0;
+    int m_interruptCounter = 0;
     
     /**
      * Constructs a new {@link EvergreenCommand} with input name, and without logging it in the shuffleboard
@@ -53,19 +55,29 @@ public abstract class EvergreenCommand extends CommandBase implements LoggableOb
         m_commandSwitch = new ConstantBoolean(subsystems[0].getName() + "/command switches/" + name);
     }
 
-    /**Schedules this command, defaulting to interruptible, as long both this an*/
+    /**Schedules this command, defaulting to interruptible, 
+     * as long both it and all of its required commands are enabled.*/
     @Override
-    public void schedule() {
-        m_ranCounter++;
+    public void schedule(boolean interruptible) {
+        
+        m_scheduleCounter++;
+        
 
-        if (canStart())
-            super.schedule();
 
-        for (Subsystem subsystem : m_requirements) {
-            if (subsystem instanceof EvergreenSubsystem) {
-                ((EvergreenSubsystem)subsystem).useWith(this);
+        if (canStart()) {
+            for (Subsystem subsystem : m_requirements) {
+                if (subsystem instanceof EvergreenSubsystem) {
+                    EvergreenSubsystem sub = (EvergreenSubsystem)subsystem;
+                    boolean allowed = sub.useWith(this, interruptible);
+                    if (!allowed) {
+                        return;
+                    }
+                }
             }
+            m_ranCounter++;
+            super.schedule(interruptible);
         }
+        
     }
 
 
@@ -120,13 +132,23 @@ public abstract class EvergreenCommand extends CommandBase implements LoggableOb
     public List<LoggableData> getLoggableData() {
         return List.of(new LoggableData[] {
             new LoggableInt(getName() + "/Ran Counter", () -> m_ranCounter)
+            new LoggableInt("Schedules", () -> m_scheduleCounter),
+            new LoggableInt("Runs", () -> m_ranCounter),
+            new LoggableInt("Interruptions", () -> m_interruptCounter),
         });
+        return res;
     }
 
     public void addRequirements(EvergreenSubsystem... subsystems ) {
         super.addRequirements(subsystems);
     }
     
+    @Override
+    public void cancel() {
+        m_interruptCounter++;
+        super.cancel();
+    }
+
 
     @Override
     public void initSendable(SendableBuilder builder) { }
