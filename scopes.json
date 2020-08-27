@@ -33,7 +33,8 @@
         "scopes" : "Scopes file",
         "todo" : "Tasks file",
         "map" : "Roadmap file",
-        "conv" : "Conventions file"
+        "conv" : "Conventions file",
+        "ignore" : ".gitignore file"
     }
 
 }
