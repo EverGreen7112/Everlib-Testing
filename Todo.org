@@ -146,11 +146,11 @@
 ** DONE Framework/Commands [2/2]
 - [X] EvergreenCommand
 - [X] InstantEvergreenCommand
-** TODO Constant Commands [0/4]
-- [ ] SetConstant
-- [ ] SetSwitch
-- [ ] ToggleSwitch
-- [ ] SetConstantUntil
+** DONE Constant Commands [4/4]
+- [X] SetConstant
+- [X] SetSwitch
+- [X] ToggleSwitch
+- [X] SetConstantUntil
 ** TODO Framework/Ranges [0/5]
 - [ ] Range
 - [ ] MinLimit
