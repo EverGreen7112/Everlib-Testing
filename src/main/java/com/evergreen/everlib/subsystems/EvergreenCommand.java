@@ -130,11 +130,23 @@ public abstract class EvergreenCommand extends CommandBase implements LoggableOb
 
     @Override
     public List<LoggableData> getLoggableData() {
-        return List.of(new LoggableData[] {
-            new LoggableInt(getName() + "/Ran Counter", () -> m_ranCounter)
+
+        String[] evergreenRequirements;
+        
+        if (m_requirements.size() == 0) {
+            evergreenRequirements = new String[] {"None"};
+        } else {
+            evergreenRequirements = 
+                (String[])m_requirements.stream()
+                .filter(v -> v instanceof EvergreenSubsystem)
+                .map(v -> ((EvergreenSubsystem)v).getName())
+                .toArray(String[]::new);
+        }
+        List<LoggableData> res = List.of(new LoggableData[] {
             new LoggableInt("Schedules", () -> m_scheduleCounter),
             new LoggableInt("Runs", () -> m_ranCounter),
             new LoggableInt("Interruptions", () -> m_interruptCounter),
+            new LoggableString("Requirements", () -> String.join(", ", evergreenRequirements))
         });
         return res;
     }
