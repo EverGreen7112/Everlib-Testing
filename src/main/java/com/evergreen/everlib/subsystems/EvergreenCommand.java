@@ -142,12 +142,28 @@ public abstract class EvergreenCommand extends CommandBase implements LoggableOb
                 .map(v -> ((EvergreenSubsystem)v).getName())
                 .toArray(String[]::new);
         }
+
         List<LoggableData> res = List.of(new LoggableData[] {
             new LoggableInt("Schedules", () -> m_scheduleCounter),
             new LoggableInt("Runs", () -> m_ranCounter),
             new LoggableInt("Interruptions", () -> m_interruptCounter),
+            new LoggableBoolean("Active", this::canStart),
+            new LoggableBoolean("Switch", m_commandSwitch::get),
             new LoggableString("Requirements", () -> String.join(", ", evergreenRequirements))
         });
+
+        for (Subsystem requirement : m_requirements) {
+            if (requirement instanceof EvergreenSubsystem) {
+                EvergreenSubsystem evergreenRequirement = (EvergreenSubsystem)requirement;
+                res.addAll(List.of( 
+                    new LoggableBoolean(
+                        "Requirement" + evergreenRequirement.getName() + " Active",
+                        () -> evergreenRequirement.getSwitchState())
+                ));
+                
+            }
+        }
+
         return res;
     }
 
