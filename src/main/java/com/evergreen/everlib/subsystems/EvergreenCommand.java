@@ -146,6 +146,7 @@ public abstract class EvergreenCommand extends CommandBase implements LoggableOb
         List<LoggableData> res = List.of(new LoggableData[] {
             new LoggableInt("Schedules", () -> m_scheduleCounter),
             new LoggableInt("Runs", () -> m_ranCounter),
+            new LoggableInt("Schedule Failures", () -> m_scheduleCounter - m_ranCounter),
             new LoggableInt("Interruptions", () -> m_interruptCounter),
             new LoggableBoolean("Active", this::canStart),
             new LoggableBoolean("Switch", m_commandSwitch::get),
