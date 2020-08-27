@@ -3,14 +3,15 @@ package com.evergreen.everlib.subsystems;
 import java.util.List;
 
 import com.evergreen.everlib.shuffleboard.constants.ConstantBoolean;
+import com.evergreen.everlib.shuffleboard.loggables.LoggableBoolean;
 import com.evergreen.everlib.shuffleboard.loggables.LoggableData;
 import com.evergreen.everlib.shuffleboard.loggables.LoggableInt;
 import com.evergreen.everlib.shuffleboard.loggables.LoggableObject;
-
-import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.Subsystem;
+import com.evergreen.everlib.shuffleboard.loggables.LoggableString;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
+import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Subsystem;
 
 /**
  * The basic command for the Eververgreen Framework.
