@@ -2,19 +2,15 @@ package com.evergreen.everlib;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import com.evergreen.everlib.oi.joysticks.EvergreenJoystick;
 import com.evergreen.everlib.oi.joysticks.ExtremeProJoystick;
 import com.evergreen.everlib.shuffleboard.constants.ConstantDouble;
-import com.evergreen.everlib.shuffleboard.handlers.Explorer;
 import com.evergreen.everlib.shuffleboard.loggables.DashboardStreams;
-import com.evergreen.everlib.shuffleboard.loggables.LoggableData;
 import com.evergreen.everlib.structure.Tree;
 import com.evergreen.everlib.subsystems.motors.subsystems.MotorController;
 import com.evergreen.everlib.subsystems.motors.subsystems.MotorController.ControllerType;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**
  * Test
@@ -39,14 +35,16 @@ public class Test extends Tree {
 
     ConstantDouble m_speedModifier = new ConstantDouble("Speed", 0.5);
     ConstantDouble m_change = new ConstantDouble("Right Adjust", 1.2);
+    
+    ExtremeProJoystick m_leftJS = new ExtremeProJoystick("Left Joystick", 1);
+    EvergreenJoystick m_rightJS = new EvergreenJoystick("Right Joystick", 2);
 
-    ExtremeProJoystick m_jsLeft = new ExtremeProJoystick("Joystick Left", 0, (v) -> v * 0.5 * 0.85);
-    ExtremeProJoystick m_jsRight = new ExtremeProJoystick("Joystick Right", 1, (v) -> v * 0.5);
 
     ADXRS450_Gyro gyro = new ADXRS450_Gyro();
   
     @Override
     protected void componentSetup() {
+
     }
 
     @Override
@@ -57,51 +55,36 @@ public class Test extends Tree {
     @Override
     protected void commandConfig() {
         
-
     }
 
     @Override
     protected void log() {
-        DashboardStreams.getInstance().addLoggable(m_motorLeft);
-        DashboardStreams.getInstance().addLoggable(m_motorRight);
-        DashboardStreams.getInstance().addDouble(
-            "Chassis Left Encoder", 
-            () -> (double)((WPI_TalonSRX)m_motorLeft.getMotors().get(0)).getSelectedSensorPosition());
-        DashboardStreams.getInstance().addDouble(
-            "Talon Encoder", () -> (double)m_leftA.getSelectedSensorPosition());
+        DashboardStreams.getInstance().addLoggable(m_leftJS);
+        DashboardStreams.getInstance().addLoggable(m_rightJS);
     }
 
     @Override
     protected void whenEnabled() {
         
-
     }
 
     @Override
     protected void autoConfig() {
         
-
     }
 
     @Override
     protected void teleopConfig() {
         
-
     }
     
     @Override
     protected void test() {
-        Explorer testExplorer = new Explorer("Test");
-        testExplorer.cd("/test");
-        System.out.println(testExplorer.pwd());
-        testExplorer.cd("test2");
-        System.out.println(testExplorer.pwd());
-        testExplorer.cd(".././test3");
-        System.out.println(testExplorer.pwd());
-        testExplorer.cd("test4");
-        System.out.println(testExplorer.pwd());
-        DashboardStreams.getInstance().addLoggable(testExplorer);
-        new JoystickButton(new Joystick(0), 2).whenPressed(new InstantCommand(testExplorer::popHistory));
+        m_leftJS.setInverted();
+        m_rightJS.setQuadratic();
+        m_rightJS.setInverted();
+        m_rightJS.kill();
+        m_leftJS.setAxisAdjuster((v) -> 100 * v);
     }
 
     @Override
@@ -112,7 +95,5 @@ public class Test extends Tree {
         // m_rightA.set(m_jsRight.getY());
         // m_rightB.set(m_jsRight.getY());
         
-    }
-
-    
+    }  
 }
