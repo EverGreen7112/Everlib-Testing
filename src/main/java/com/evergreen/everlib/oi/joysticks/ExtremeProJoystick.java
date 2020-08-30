@@ -1,5 +1,10 @@
 package com.evergreen.everlib.oi.joysticks;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.evergreen.everlib.shuffleboard.loggables.LoggableBoolean;
+import com.evergreen.everlib.shuffleboard.loggables.LoggableData;
 import com.evergreen.everlib.utils.Adjuster;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -162,5 +167,23 @@ public class ExtremeProJoystick extends EvergreenJoystick {
     */
     public Button thumb() {
         return new JoystickButton(this, 2);
+    }
+
+    @Override
+    public List<LoggableData> getLoggableData() {
+        ArrayList<LoggableData> res = new ArrayList<>(super.getLoggableData());
+        for (X x : X.values()) {
+            for (Y y : Y.values()) {
+                for (Z z : Z.values()) {
+                    try {
+                        res.add(new LoggableBoolean(x.toString() + "," + y.toString() + "," + z.toString(), getButton(x, y, z)::get));
+                    } catch (IllegalArgumentException e) {
+                        // Pass.
+                    }
+
+                }
+            }
+        }
+        return res;
     }
 }
