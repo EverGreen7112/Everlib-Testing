@@ -6,7 +6,7 @@ import java.util.function.Supplier;
 
 import com.evergreen.everlib.shuffleboard.loggables.LoggableDouble;
 import com.evergreen.everlib.subsystems.motors.subsystems.DriveTrain;
-import com.evergreen.everlib.utils.ranges.Range;
+import com.evergreen.everlib.utils.constraints.Constraint;
 
 /**
  * TankDrive
@@ -46,9 +46,9 @@ public class TankDrive extends SetMotorSystem {
    * to its shuffleboard switch.
    * @param subsystem - The subsystem to move.
    * @param speedMap - A {@link Map} which links controllers (by index) to speed suppliers.
-   * @param limit - a {@link Range} which supplies the range in which to allow the subsystem to move.
+   * @param limit - a {@link Constraint} which supplies the range in which to allow the subsystem to move.
    */
-  public TankDrive(String name, DriveTrain subsystem, Range limit, 
+  public TankDrive(String name, DriveTrain subsystem, Constraint limit, 
     Supplier<Double> leftSpeed, Supplier<Double> rightSpeed) {
     super(name, subsystem, limit, Map.of(0, leftSpeed, 1, rightSpeed));
   }
@@ -64,7 +64,7 @@ public class TankDrive extends SetMotorSystem {
    * @param rightSpeed - the speed supplier for the power to give to the right motors of the drive tank.
    * @param speedModifier - the modifier for the speed suppliers for this movement.
    */
-  public TankDrive(String name, DriveTrain subsystem, Range limit, 
+  public TankDrive(String name, DriveTrain subsystem, Constraint limit, 
     Supplier<Double> leftSpeed, Supplier<Double> rightSpeed, Supplier<Double> speedModifier) { 
     super(name, subsystem, limit, speedModifier, Map.of(0, leftSpeed, 1, rightSpeed));
   }

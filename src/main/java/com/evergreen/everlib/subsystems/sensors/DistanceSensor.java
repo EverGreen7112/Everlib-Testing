@@ -1,10 +1,3 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2018 FIRST. All Rights Reserved.                             */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package com.evergreen.everlib.subsystems.sensors;
 
 import java.util.List;
@@ -14,8 +7,8 @@ import com.evergreen.everlib.shuffleboard.loggables.LoggableData;
 import com.evergreen.everlib.shuffleboard.loggables.LoggableDouble;
 import com.evergreen.everlib.shuffleboard.loggables.LoggableObject;
 import com.evergreen.everlib.subsystems.EvergreenSubsystem;
-import com.evergreen.everlib.utils.ranges.Limitless;
-import com.evergreen.everlib.utils.ranges.Range;
+import com.evergreen.everlib.utils.constraints.Constraint;
+import com.evergreen.everlib.utils.constraints.Free;
 
 /**
  * Add your docs here.
@@ -24,7 +17,7 @@ public abstract class DistanceSensor implements LoggableObject {
 
     private String m_name;
 
-    private Range m_absoluteLimits;
+    private Constraint m_absoluteLimits;
     private double m_offset;
     private String m_subsystemName;
 
@@ -35,18 +28,18 @@ public abstract class DistanceSensor implements LoggableObject {
     private boolean m_killSwitch;
 
     public DistanceSensor(String name) {
-        this(name, new Limitless(), 0);
+        this(name, new Free(), 0);
     }
 
     public DistanceSensor(String name, double offset) {
-        this(name, new Limitless(), offset);
+        this(name, new Free(), offset);
     }
 
-    public DistanceSensor(String name, Range absoluteLimit) {
+    public DistanceSensor(String name, Constraint absoluteLimit) {
         this(name, absoluteLimit, 0);
     }
 
-    public DistanceSensor(String name, Range absoluteLimit, double offset) {
+    public DistanceSensor(String name, Constraint absoluteLimit, double offset) {
         m_name = name;
         m_absoluteLimits = absoluteLimit;
         m_offset = offset;
@@ -57,7 +50,7 @@ public abstract class DistanceSensor implements LoggableObject {
     public final double getPosition() {
         double distance = _getDistance() + m_offset;
 
-        if (!m_killSwitch && !m_absoluteLimits.inRange(distance)) {
+        if (!m_killSwitch && !m_absoluteLimits.allowed(distance)) {
             m_killSwitch = true;
         }
 
@@ -105,7 +98,7 @@ public abstract class DistanceSensor implements LoggableObject {
         return m_killSwitch;
     }
 
-    public void setAbsoluteLimits(Range absoluteLimits) {
+    public void setAbsoluteLimits(Constraint absoluteLimits) {
         m_absoluteLimits = absoluteLimits;
     }
 

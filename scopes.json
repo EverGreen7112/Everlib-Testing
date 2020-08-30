@@ -26,7 +26,7 @@
 
     "utils":
     {
-        "ranges": "Range Classes"
+        "constr": "Range Classes"
     },
 
     "base": "Base Framework",

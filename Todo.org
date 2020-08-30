@@ -152,11 +152,11 @@
 - [X] ToggleSwitch
 - [X] SetConstantUntil
 ** TODO Framework/Ranges [0/5]
-- [ ] Range
-- [ ] MinLimit
-- [ ] MaxLimit
-- [ ] DoubleLimit
-- [ ] Limitless
+- [X] Range
+- [X] MinLimit
+- [X] MaxLimit
+- [X] DoubleLimit
+- [X] Limitless
 ** TODO OI [0/6]
 - [ ] Adjuster
 - [ ] EvergreenJoystick
@@ -166,7 +166,6 @@
 - [ ] OIExceptions
 ** TODO Sensor Classes [0/4]
 - [ ] DistanceSensorGroup
-- [ ] LaserSensor
 - [ ] DistanceSensor
 - [ ] EvergreenEncoder
 ** TODO Motor Subsystem Classes [0/4]
