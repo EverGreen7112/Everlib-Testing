@@ -17,7 +17,7 @@ import java.util.function.Supplier;
 import com.evergreen.everlib.shuffleboard.constants.ConstantBoolean;
 import com.evergreen.everlib.shuffleboard.loggables.LoggableDouble;
 import com.evergreen.everlib.subsystems.motors.subsystems.MotorSubsystem;
-import com.evergreen.everlib.utils.ranges.Range;
+import com.evergreen.everlib.utils.constraints.Constraint;
 
 /**
  * Moves a {@link MotorSubsystem} according to iput speed and range.
@@ -33,7 +33,7 @@ public class MoveMotorSystem extends SetMotorSystem {
    * @param speed - The speed supplier ywhich will supply the speed to move the subsystem.
    * @param speedRange - The range in which to move the subsystem.
    */
-  public MoveMotorSystem(String name, MotorSubsystem subsystem, Supplier<Double> speed, Range speedRange ) {
+  public MoveMotorSystem(String name, MotorSubsystem subsystem, Supplier<Double> speed, Constraint speedRange ) {
     super(name, subsystem, speedRange,  getMap(speed, subsystem));
   }
 
@@ -48,7 +48,7 @@ public class MoveMotorSystem extends SetMotorSystem {
    * @param speedRange - The range in which to move the subsystem.
    */
   public MoveMotorSystem(String name, MotorSubsystem subsystem, Supplier<Double> speed,
-    Supplier<Double> speedModifier, Range speedRange ) {
+    Supplier<Double> speedModifier, Constraint speedRange ) {
     super(name, subsystem, speedRange, speedModifier, getMap(speed, subsystem));
   }
 

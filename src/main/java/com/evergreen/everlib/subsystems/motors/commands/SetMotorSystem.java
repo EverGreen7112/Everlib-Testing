@@ -9,12 +9,12 @@ import com.evergreen.everlib.subsystems.EvergreenCommand;
 import com.evergreen.everlib.subsystems.EvergreenSubsystem;
 import com.evergreen.everlib.subsystems.motors.subsystems.MotorController;
 import com.evergreen.everlib.subsystems.motors.subsystems.MotorSubsystem;
+import com.evergreen.everlib.utils.constraints.Constraint;
+import com.evergreen.everlib.utils.constraints.Free;
 import com.evergreen.everlib.shuffleboard.loggables.LoggableBoolean;
 import com.evergreen.everlib.shuffleboard.loggables.LoggableData;
 import com.evergreen.everlib.shuffleboard.loggables.LoggableDouble;
 import com.evergreen.everlib.shuffleboard.loggables.LoggableString;
-import com.evergreen.everlib.utils.ranges.Limitless;
-import com.evergreen.everlib.utils.ranges.Range;
 
 /**A {@link Command} which moves a {@link MotorSubsystem} according to a given speed map.
  * 
@@ -30,11 +30,11 @@ public class SetMotorSystem extends EvergreenCommand {
 
   protected Supplier<Double> m_speedModifier;
   
-  protected Range m_limit;
+  protected Constraint m_limit;
 
   protected static double s_defaultModifier = 0.5;
   
-  private static final Range DEFAULT_RANGE = new Limitless();
+  private static final Constraint DEFAULT_RANGE = new Free();
   private static final Supplier<Double> DEFAULT_MODIFIER = () -> 1.0;
 
   
@@ -58,7 +58,7 @@ public class SetMotorSystem extends EvergreenCommand {
    * @param speedMap - A {@link Map} which {@link MotorController} indexes on the subsystem to speed
    * suppliers to set.
    */
-  public SetMotorSystem(String name, MotorSubsystem subsystem, Range limit, Supplier<Double> speedModifier,
+  public SetMotorSystem(String name, MotorSubsystem subsystem, Constraint limit, Supplier<Double> speedModifier,
     Map<Integer, Supplier<Double>> speedMap) {
       super(name, subsystem);
       
@@ -108,7 +108,7 @@ public class SetMotorSystem extends EvergreenCommand {
    *  
    * @param log - Wether to log this commandn the shuffleboard or not.
    */
-  public SetMotorSystem(String name, MotorSubsystem subsystem, Range limit, Map<Integer, Supplier<Double>> speedMap) {
+  public SetMotorSystem(String name, MotorSubsystem subsystem, Constraint limit, Map<Integer, Supplier<Double>> speedMap) {
     this(name, subsystem, limit, DEFAULT_MODIFIER, speedMap);
   }
 
@@ -146,7 +146,7 @@ public class SetMotorSystem extends EvergreenCommand {
   /**Finish if the subsystem goes out of its permitted range, or if the command times out. */
   @Override
   public boolean isFinished()  {
-    return !m_limit.inRange(m_subsystem.getPosition()) || !m_subsystem.canMove();
+    return !m_limit.allowed(m_subsystem.getPosition()) || !m_subsystem.canMove();
   }
 
   
@@ -168,7 +168,7 @@ public class SetMotorSystem extends EvergreenCommand {
     loggables.addAll(List.of(new LoggableData[] 
     {
       new LoggableString(getName() + " - Subsystem", m_subsystem::getName),
-      new LoggableBoolean(getName() + " - In Range", () -> m_limit.inRange(m_subsystem.getPosition())),
+      new LoggableBoolean(getName() + " - In Range", () -> m_limit.allowed(m_subsystem.getPosition())),
       new LoggableDouble(getName() + " - Speed Modifier", m_speedModifier),
       new LoggableDouble(getName() + " - Position", () -> m_subsystem.getPosition())
     }));

@@ -13,8 +13,8 @@ import com.evergreen.everlib.shuffleboard.loggables.LoggableBoolean;
 import com.evergreen.everlib.shuffleboard.loggables.LoggableData;
 import com.evergreen.everlib.shuffleboard.loggables.LoggableDouble;
 import com.evergreen.everlib.utils.PIDSettings;
-import com.evergreen.everlib.utils.ranges.Limitless;
-import com.evergreen.everlib.utils.ranges.Range;
+import com.evergreen.everlib.utils.constraints.Constraint;
+import com.evergreen.everlib.utils.constraints.Free;
 
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -27,7 +27,7 @@ public class MotorSubsystem extends EvergreenSubsystem {
     protected MotorController[] m_controllers;
 
     /**The range in which the subsystem is allowed to move. */
-    protected Range m_Range;
+    protected Constraint m_Range;
 
     protected PIDSettings m_anglePID;
     protected PIDSettings m_displacementPID;
@@ -37,7 +37,7 @@ public class MotorSubsystem extends EvergreenSubsystem {
     {
         super(name);
         m_controllers = motors;
-        m_Range = new Limitless();
+        m_Range = new Free();
         
         for (MotorController motor : m_controllers) {
             for (DistanceSensor sensor : motor.getEncoders()) {
@@ -52,14 +52,14 @@ public class MotorSubsystem extends EvergreenSubsystem {
     }
 
 
-    public MotorSubsystem(String name, DistanceSensor sensor, Range range, MotorController... motors)
+    public MotorSubsystem(String name, DistanceSensor sensor, Constraint range, MotorController... motors)
     {
         this(name, sensor, motors);
         m_Range = range;
         
     }
 
-    public MotorSubsystem(String name, DistanceSensor distanceSensor, Range range, 
+    public MotorSubsystem(String name, DistanceSensor distanceSensor, Constraint range, 
         Command defaultCommand, MotorController... motors)
     {
         this(name, distanceSensor, range, motors);
@@ -111,7 +111,7 @@ public class MotorSubsystem extends EvergreenSubsystem {
     }
 
     public boolean canMove() {
-        return m_Range.inRange(getPosition()) && m_subsystemSwitch.get();
+        return m_Range.allowed(getPosition()) && m_subsystemSwitch.get();
     }
 
     public PIDSettings getAnglePID() {
