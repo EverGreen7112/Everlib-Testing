@@ -33,7 +33,7 @@
 - [ ] F310GamePad
 - [ ] ExtremeProJoystick
 - [ ] GroupButtonBindings
-- [ ] JoystickEG
+- [ ] EvergreenJoystick
 - [ ] OIExceptions
 ** TODO Sensor Classes [0/4]
 - [ ] DistanceSensorGroup
@@ -98,7 +98,7 @@
 - [X] F310GamePad
 - [X] ExtremeProJoystick
 - [X] GroupButtonBindings
-- [ ] JoystickEG
+- [ ] EvergreenJoystick
 - [ ] OIExceptions
 ** TODO Sensor Classes [0/4]
 - [ ] DistanceSensorGroup
