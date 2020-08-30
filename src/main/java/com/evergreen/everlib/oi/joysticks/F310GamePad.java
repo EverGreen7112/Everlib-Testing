@@ -82,5 +82,4 @@ public class F310GamePad extends JoystickEG {
     public Button getButton(F310 button) {
         return new JoystickButton(this, button.m_buttonPort);
     }
-
 }
