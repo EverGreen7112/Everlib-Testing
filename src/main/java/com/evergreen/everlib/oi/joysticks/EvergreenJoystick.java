@@ -12,18 +12,15 @@ import edu.wpi.first.wpilibj.Joystick;
 
 /**
  * The base class for {@link Joystick}s in the Evergreen Framework.
- * <p>
- * <p>
+* <p>
  * Most importantly, it provides easy methods to invert and expontiate the
  * joytsick axis, and allowes {@link #getRawAxis(AxisType) getRawAxis} by
  * {@link AxisType}, for clearer code.
- * <p>
- * <p>
+* <p>
  * For more advance adjustments,this class contains an {@link Adjuster adjuster}
  * for each of the axes, which can be set using its
  * {@link #setAxisAdjuster(int, Adjuster)} method.
- * <p>
- * <p>
+* <p>
  * It also allowes a quick disable with its {@link #kill()} method, which converts all outputs to 0.
  * 
  * @author Atai Ambus
@@ -40,10 +37,10 @@ public class EvergreenJoystick extends Joystick implements LoggableObject {
     private final String m_name;
 
     /**
-     * Whether the joystick is exponential - the position-to-value function
-     * ({@link Joystick#getRawAxis(int)} is exponential or linear.
+     * Whether the joystick is quadratic - the position-to-value function
+     * ({@link Joystick#getRawAxis(int)} is quadratic or linear.
      */
-    private boolean m_exponential = false;
+    private boolean m_quadratic = false;
 
     /**
      * Whether the joystick is inverted = should we multiply its values by -1?
@@ -98,10 +95,13 @@ public class EvergreenJoystick extends Joystick implements LoggableObject {
 
         value = m_adjusters[axis].adjust(value);
 
-        if (m_exponential)
+        if (m_quadratic) {
             value *= Math.abs(value);
-        if (m_inverted)
+        }
+
+        if (m_inverted) {
             value *= -1;
+        }
 
         return value;
     }
@@ -110,12 +110,8 @@ public class EvergreenJoystick extends Joystick implements LoggableObject {
         return getRawAxis(axis.value);
     }
 
-    public void setDefaultAdjuster(Adjuster<Double> adjuster) {
-        m_defaultAdjuster = adjuster;
-    }
-
-    public void setExponential() {
-        m_exponential = true;
+    public void setQuadratic() {
+        m_quadratic = true;
     }
 
 
@@ -131,6 +127,8 @@ public class EvergreenJoystick extends Joystick implements LoggableObject {
     public String getName() {
         return m_name;
     }
+
+    
 
     @Override
     public List<LoggableData> getLoggableData() {
