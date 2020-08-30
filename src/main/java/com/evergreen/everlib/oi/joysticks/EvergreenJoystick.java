@@ -27,8 +27,6 @@ import edu.wpi.first.wpilibj.Joystick;
  */
 public class EvergreenJoystick extends Joystick implements LoggableObject {
 
-    /** number of axes on the joystick */
-    private static final int AXES_NUM = 5;
 
     /** if none were specified, the joystick's adjuster will be set to this */
     private static final Adjuster<Double> DEFAULT_DEFAULT_ADJUSTER = (val) -> val;
@@ -51,7 +49,7 @@ public class EvergreenJoystick extends Joystick implements LoggableObject {
      * An array of the adjusters for each axis.
      */
     @SuppressWarnings("unchecked")
-    private Adjuster<Double>[] m_adjusters = (Adjuster<Double>[]) new Adjuster[AXES_NUM];
+    private Adjuster<Double>[] m_adjusters = (Adjuster<Double>[]) new Adjuster[AXES_NUM()];
 
     /**The default adjuster - applied if no adjuster was specified for an axis*/
     private Adjuster<Double> m_defaultAdjuster;
@@ -88,11 +86,10 @@ public class EvergreenJoystick extends Joystick implements LoggableObject {
 
     @Override
     public double getRawAxis(int axis) throws OIExceptions.AxisDoesNotExistException {
-        if (axis > AXES_NUM)
+        if (axis > AXES_NUM())
             throw new OIExceptions.AxisDoesNotExistException();
 
         double value = super.getRawAxis(axis);
-
         value = m_adjusters[axis].adjust(value);
 
         if (m_quadratic) {
@@ -139,5 +136,9 @@ public class EvergreenJoystick extends Joystick implements LoggableObject {
             new LoggableDouble("Throttle", this::getThrottle),
             new LoggableDouble("Twist", this::getTwist)
         );
+    }
+
+    private static int AXES_NUM() {
+        return 5;
     }
 }
