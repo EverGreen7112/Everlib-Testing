@@ -24,3 +24,13 @@
     It's possible that one side should be or is more accurate than the other.
 ** TODO Allow varargs in DashbaordStreams' addLoggable method
     "Dashboard.getInstance().addLoggable" is a lot to write. It would be more convinient to add everything together.
+* PROJ Feature Suggestions
+** TODO defaultCommands in Command
+    Many times we want to use command but eventually dosent finish all the work on them, for exemple dosent finish the PID Calibration or problems with the Encoder. in such case we creates a new Command (such as set the motor to constant speed) and change all the calls for the old command to the new commands, and we do that while we have the robot without useing it.
+
+    Im sugsstion to add to every command member of defaultCommand so we wouldnt have to create new commands.
+
+    Implementations idea: every method that CommandEg overriddes from CommandGroup (initialize, excute,isFinished etc) will be final, and for each method of this form there will be method that called this<method> for example: thisInitialize. the method which overrides CommandEg will be written in the form:
+    if (m_useDefualt): m_defualt.<method> else: this<method>. I also have an idea how to avoid NullPointerException but i will explain if we actually will implement it in this way.
+** TODO Exceptions in shuffleboard
+    when we use exception we mostly print somthing to the console , but the console is always updating and we might miss the exception. im suggest that we will create a shuffleboard directory for exception and instead of print somthing to the console we will add string to shuffleboard.
