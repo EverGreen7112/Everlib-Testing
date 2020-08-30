@@ -29,7 +29,7 @@ public class EvergreenJoystick extends Joystick implements LoggableObject {
 
 
     /** if none were specified, the joystick's adjuster will be set to this */
-    private static final Adjuster<Double> DEFAULT_DEFAULT_ADJUSTER = (val) -> val;
+    private static final Adjuster<Double> DEFAULT_ADJUSTER = (val) -> val;
 
     /** The joystick's name (for logging purposes) */
     private final String m_name;
@@ -51,9 +51,6 @@ public class EvergreenJoystick extends Joystick implements LoggableObject {
     @SuppressWarnings("unchecked")
     private Adjuster<Double>[] m_adjusters = (Adjuster<Double>[]) new Adjuster[AXES_NUM()];
 
-    /**The default adjuster - applied if no adjuster was specified for an axis*/
-    private Adjuster<Double> m_defaultAdjuster;
-
     /**
      * Constructs a {@link EvergreenJoystick} at input port.
      * 
@@ -61,7 +58,7 @@ public class EvergreenJoystick extends Joystick implements LoggableObject {
      * @param port - The joystick's port, as tuned in the Driver Station
      */
     public EvergreenJoystick(String name, int port) {
-        this(name, port, DEFAULT_DEFAULT_ADJUSTER);
+        this(name, port, DEFAULT_ADJUSTER);
     }
 
     /**
@@ -75,13 +72,16 @@ public class EvergreenJoystick extends Joystick implements LoggableObject {
     public EvergreenJoystick(String name, int port, Adjuster<Double> adjuster) {
         super(port);
         m_name = name;
-        m_defaultAdjuster = adjuster;
-        Arrays.fill(m_adjusters, m_defaultAdjuster);
+        Arrays.fill(m_adjusters, DEFAULT_ADJUSTER);
 
     }
 
     public void setAxisAdjuster(Joystick.AxisType axis, Adjuster<Double> adjuster) {
         m_adjusters[axis.value] = adjuster;
+    }
+
+    public void setAxisAdjuster(Adjuster<Double> adjuster) {
+        Arrays.fill(m_adjusters,adjuster);
     }
 
     @Override
@@ -117,7 +117,8 @@ public class EvergreenJoystick extends Joystick implements LoggableObject {
     }
 
     public void kill() {
-        m_defaultAdjuster = (v) -> 0.0;
+        Adjuster<Double> dead = (v) -> 0.0; // Compiler does not like one line.
+        Arrays.fill(m_adjusters, dead);
     }
 
     @Override
