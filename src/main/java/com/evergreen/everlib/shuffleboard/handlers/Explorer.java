@@ -103,6 +103,6 @@ public class Explorer implements LoggableObject {
     }
 
     public boolean atRoot() {
-        return m_workingDirectory == "";
+        return m_workingDirectory.equals("");
     }
 }

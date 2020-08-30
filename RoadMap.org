@@ -20,3 +20,7 @@
     The conventions for shuffleboard loggables and constants are currently undetermined. Generally this is not an issue for the code, as names and paths are set manually, but the names for the switches of each command are hardcoded into the class EvergreenCommand. At the moment a placeholder "<command name> | <switch>" is used, but it should be changed when conventions are determined. 
 ** TODO Create Constant Increment commands
     There is a command for setting a double constant's value, and the number Constant classes have methods for percentage and absolute increment, but command classes are missing. Given that the original reasoning behind these classes and methods were things like buttons to increase the robot speed, it seems apropriate to add the increment methods as commands as well.
+** TODO Allow different tolerance for lower and upper limits in Range
+    It's possible that one side should be or is more accurate than the other.
+** TODO Allow varargs in DashbaordStreams' addLoggable method
+    "Dashboard.getInstance().addLoggable" is a lot to write. It would be more convinient to add everything together.
