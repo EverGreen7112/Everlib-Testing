@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.Preferences;
  */
 public abstract class Constant {
 
-    /**A name for this constant (the lastpart of its path) */
+    /**A name for this constant (the last part of its path) */
     private String m_name;
 
     /**The "folder" this constant is in*/
@@ -30,7 +30,7 @@ public abstract class Constant {
     public Constant(String name, Object value) {
         m_name = name;
         m_folder = DashboardConstants.getInstance().pwd()
-            .substring(1); //Remove root / - incompatiable with suffleboard.
+            .substring(1); //Remove root / - incompatiable with shuffleboard.
 
         if (wasAdded()) {
             System.out.println(String.format(
@@ -48,7 +48,7 @@ public abstract class Constant {
     }
 
     /**
-     * @return the path to the current constanto on the shuffleboard (under Preferences).
+     * @return the path to the current constant on the shuffleboard (under Preferences).
      */
     public String getPath() {
         return m_folder + "/" + m_name;
@@ -69,7 +69,7 @@ public abstract class Constant {
 
     /**
      * Moves the constant to a folder, with respect to standart path syntax (., .. and /)
-     * @param folder, 
+     * @param folder the new folder that the constant should be moved to. 
      */
     public void move(String folder) {
         remove();
@@ -92,15 +92,32 @@ public abstract class Constant {
         addToDashboard();   
     }
 
-    
+    /**
+     * Add the constant to the dashboard
+     */
     public abstract void addToDashboard();
+
+    /**
+     * Add the value to the dashboard
+     * <p>
+     * TODO: (Atai) explain why this method exists
+     * @param value the value that should be added
+     * 
+     */
     protected abstract void addToDashboard(Object value);
 
-
+    /**
+     * Reset the constant value to its initial value
+     */
     public void reset() {
         addToDashboard();
     }
-
+    
+    /**
+     * Remove the value from the dashboard
+     *!DOSENT WORK CURRENTLY
+     */
+    @Deprecated
     public void remove() {
         if (wasAdded())
             Preferences.getInstance().remove(getPath());
@@ -110,11 +127,16 @@ public abstract class Constant {
                 + " Shuffleboard in the first place! ", 
                 m_name, m_folder));
     }
-
+    /**
+     * @return true if the constant was Added to the Shuffleboard.
+     */
     public boolean wasAdded() {
         return Preferences.getInstance().containsKey(getPath());
     }
 
-
+    /**
+     * 
+     * @return  the type of the object (int, double, string, boolean)
+     */
     public abstract String getType();
 }
