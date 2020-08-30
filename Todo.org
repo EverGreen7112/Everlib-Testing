@@ -158,7 +158,7 @@
 - [X] DoubleLimit
 - [X] Limitless
 ** TODO OI [0/6]
-- [ ] Adjuster
+- [X] Adjuster
 - [ ] EvergreenJoystick
 - [ ] F310GamePad
 - [ ] ExtremeProJoystick
