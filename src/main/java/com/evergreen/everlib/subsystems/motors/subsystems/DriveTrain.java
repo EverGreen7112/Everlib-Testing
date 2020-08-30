@@ -2,7 +2,7 @@ package com.evergreen.everlib.subsystems.motors.subsystems;
 
 import java.util.Map;
 
-import com.evergreen.everlib.oi.joysticks.JoystickEG;
+import com.evergreen.everlib.oi.joysticks.EvergreenJoystick;
 import com.evergreen.everlib.subsystems.motors.commands.TankDrive;
 import com.evergreen.everlib.subsystems.sensors.DistanceSensor;
 
@@ -35,7 +35,7 @@ public class DriveTrain extends MotorSubsystem {
         set(0, speed);
     }
 
-    public void setDefaultByJoystick(JoystickEG joystick, AxisType leftAxis, AxisType rightAxis) {
+    public void setDefaultByJoystick(EvergreenJoystick joystick, AxisType leftAxis, AxisType rightAxis) {
         setDefaultCommand(
             new TankDrive(
                 getName() + " default command (drive tank by joystick)", 
