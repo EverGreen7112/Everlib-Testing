@@ -7,9 +7,6 @@ import java.util.Stack;
 import com.evergreen.everlib.shuffleboard.loggables.LoggableData;
 import com.evergreen.everlib.shuffleboard.loggables.LoggableObject;
 import com.evergreen.everlib.shuffleboard.loggables.LoggableString;
-import com.evergreen.everlib.structure.Tree;
-
-import edu.wpi.first.wpilibj.Joystick;
 
 /**
  * Explorer

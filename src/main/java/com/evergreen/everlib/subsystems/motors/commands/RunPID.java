@@ -4,14 +4,14 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-import com.evergreen.everlib.utils.PIDSettings;
-
-import edu.wpi.first.wpilibj2.command.PIDCommand;
-
 import com.evergreen.everlib.shuffleboard.loggables.LoggableData;
 import com.evergreen.everlib.shuffleboard.loggables.LoggableDouble;
 import com.evergreen.everlib.subsystems.EvergreenCommand;
 import com.evergreen.everlib.subsystems.EvergreenSubsystem;
+import com.evergreen.everlib.utils.PIDSettings;
+
+import edu.wpi.first.wpilibj.controller.PIDController;
+import edu.wpi.first.wpilibj2.command.PIDCommand;
 
 
 /**
@@ -57,6 +57,7 @@ public class RunPID extends EvergreenCommand {
     @Override
     public List<LoggableData> getLoggableData() {
         List<LoggableData> loggables = super.getLoggableData();
+        PIDController controller = m_settings.getController();
 
         loggables.addAll(List.of(
             new LoggableDouble("kP", m_settings::kP),
@@ -64,17 +65,14 @@ public class RunPID extends EvergreenCommand {
             new LoggableDouble("kD", m_settings::kD),
             new LoggableDouble("kF", m_settings::kF),
             new LoggableDouble("Tolerance", m_settings::getTolerance),
-            new LoggableDouble("Distance", () -> m_settings.getController().getSetpoint() - m_settings.getController().getPositionError()),
+            new LoggableDouble("Distance", () -> controller.getSetpoint() - controller.getPositionError()),
             new LoggableDouble("Period", m_settings::getPeriod),
-            new LoggableDouble("Setpoint", m_settings.getController()::getSetpoint),
+            new LoggableDouble("Setpoint", controller::getSetpoint),
             
-            new LoggableDouble("Error", 
-                () -> m_settings.getController().getSetpoint()),
+            new LoggableDouble("Error", controller::getSetpoint),
+            new LoggableDouble("Calculated PIDF", () -> controller.calculate(m_measurement.get()))
+        ));
 
-            new LoggableDouble("Calculated PIDF", () -> 
-                m_command.getController().calculate(m_settings.getController().calculate(m_measurement.get())))
-            ));
-        
         return loggables;
     }
 

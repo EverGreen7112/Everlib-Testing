@@ -100,7 +100,6 @@ public abstract class Constant {
     /**
      * Add the value to the dashboard
      * <p>
-     * TODO: (Atai) explain why this method exists
      * @param value the value that should be added
      * 
      */
@@ -113,11 +112,6 @@ public abstract class Constant {
         addToDashboard();
     }
     
-    /**
-     * Remove the value from the dashboard
-     *!DOSENT WORK CURRENTLY
-     */
-    @Deprecated
     public void remove() {
         if (wasAdded())
             Preferences.getInstance().remove(getPath());

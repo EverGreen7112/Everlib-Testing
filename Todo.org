@@ -39,7 +39,7 @@
 - [ ] DistanceSensorGroup
 - [ ] LaserSensor
 - [ ] DistanceSensor
-- [ ] EncoderEG
+- [ ] EvergreenEncoder
 ** TODO Motor Subsystem Classes [0/4]
 - [ ] SubsystemEG
 - [ ] MotorController
@@ -104,7 +104,7 @@
 - [ ] DistanceSensorGroup
 - [ ] LaserSensor
 - [ ] DistanceSensor
-- [ ] EncoderEG
+- [ ] EvergreenEncoder
 ** TODO Motor Subsystem Classes [0/4]
 - [ ] SubsystemEG
 - [ ] MotorController
@@ -168,7 +168,7 @@
 - [ ] DistanceSensorGroup
 - [ ] LaserSensor
 - [ ] DistanceSensor
-- [ ] EncoderEG
+- [ ] EvergreenEncoder
 ** TODO Motor Subsystem Classes [0/4]
 - [ ] SubsystemEG
 - [ ] MotorController
