@@ -24,7 +24,7 @@ publishing {
     }
 }
 
-def ROBOT_MAIN_CLASS = "com.evergreen.everlib.Main"
+def ROBOT_MAIN_CLASS = "com.evergreen.fertilizer.Main"
 
 repositories {
     maven {
