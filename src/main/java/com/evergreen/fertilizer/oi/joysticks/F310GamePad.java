@@ -1,5 +1,10 @@
 package com.evergreen.fertilizer.oi.joysticks;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.evergreen.fertilizer.shuffleboard.loggables.LoggableBoolean;
+import com.evergreen.fertilizer.shuffleboard.loggables.LoggableData;
 import com.evergreen.fertilizer.utils.Adjuster;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -74,6 +79,15 @@ public class F310GamePad extends EvergreenJoystick {
      */
     public Button getButton(F310 button) {
         return new JoystickButton(this, button.m_buttonPort);
+    }
+
+    @Override
+    public List<LoggableData> getLoggableData() {
+        ArrayList<LoggableData> res = new ArrayList<>(super.getLoggableData());
+        for (F310 button : F310.values()) {
+            res.add((LoggableData)(new LoggableBoolean(button.name(), getButton(button)::get)));
+        }
+        return res;
     }
     
 }
