@@ -2,7 +2,7 @@ package com.evergreen.fertilizer.subsystems.motors.subsystems;
 
 import java.util.Map;
 
-import com.evergreen.fertilizer.oi.joysticks.JoystickEG;
+import com.evergreen.fertilizer.oi.joysticks.EvergreenJoystick;
 import com.evergreen.fertilizer.subsystems.motors.commands.TankDrive;
 import com.evergreen.fertilizer.subsystems.sensors.DistanceSensor;
 
@@ -35,7 +35,7 @@ public class DriveTrain extends MotorSubsystem {
         set(0, speed);
     }
 
-    public void setDefaultByJoystick(JoystickEG joystick, AxisType leftAxis, AxisType rightAxis) {
+    public void setDefaultByJoystick(EvergreenJoystick joystick, AxisType leftAxis, AxisType rightAxis) {
         setDefaultCommand(
             new TankDrive(
                 getName() + " default command (drive tank by joystick)", 

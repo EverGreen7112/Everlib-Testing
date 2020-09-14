@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
  * 
  * @author Atai Ambus
  */
-public class ExtremeProJoystick extends JoystickEG {
+public class ExtremeProJoystick extends EvergreenJoystick {
 
     /**The port at which the normal button ports start, after the trigger and thumb buttons. */
     private int BUTTON_START = 3;
