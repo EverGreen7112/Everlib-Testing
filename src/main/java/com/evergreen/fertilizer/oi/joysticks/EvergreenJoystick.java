@@ -1,4 +1,5 @@
 package com.evergreen.fertilizer.oi.joysticks;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -130,13 +131,17 @@ public class EvergreenJoystick extends Joystick implements LoggableObject {
 
     @Override
     public List<LoggableData> getLoggableData() {
-        return List.of(
-            new LoggableDouble("X axis", this::getX),
+        
+        ArrayList<LoggableData> res = new ArrayList<>();
             new LoggableDouble("Y axis", this::getY),
             new LoggableDouble("Z axis", this::getZ),
             new LoggableDouble("Throttle", this::getThrottle),
-            new LoggableDouble("Twist", this::getTwist)
-        );
+        res.add(new LoggableDouble("X axis", this::getX));
+        res.add(new LoggableDouble("Y axis", this::getY));
+        res.add(new LoggableDouble("Z axis", this::getZ));
+        res.add(new LoggableDouble("Throttle", this::getThrottle));
+        res.add(new LoggableDouble("Twist", this::getTwist));
+        return res;
     }
 
     private static int AXES_NUM() {
