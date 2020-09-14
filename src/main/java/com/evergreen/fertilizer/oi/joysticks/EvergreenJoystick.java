@@ -1,10 +1,12 @@
 package com.evergreen.fertilizer.oi.joysticks;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import com.evergreen.fertilizer.oi.OIExceptions;
 import com.evergreen.fertilizer.shuffleboard.loggables.LoggableData;
 import com.evergreen.fertilizer.shuffleboard.loggables.LoggableDouble;
+import com.evergreen.fertilizer.shuffleboard.loggables.LoggableInt;
 import com.evergreen.fertilizer.shuffleboard.loggables.LoggableObject;
 import com.evergreen.fertilizer.utils.Adjuster;
 
@@ -13,15 +15,15 @@ import edu.wpi.first.wpilibj.Joystick;
 /**
  * The base class for {@link Joystick}s in the Evergreen Framework.
 * <p>
- * Most importantly, it provides easy methods to invert and expontiate the
- * joytsick axis, and allowes {@link #getRawAxis(AxisType) getRawAxis} by
+ * Most importantly, it provides easy methods to invert and quadrate the
+ * joystick axis, and allows {@link #getRawAxis(AxisType) getRawAxis} by
  * {@link AxisType}, for clearer code.
 * <p>
  * For more advance adjustments,this class contains an {@link Adjuster adjuster}
  * for each of the axes, which can be set using its
  * {@link #setAxisAdjuster(int, Adjuster)} method.
 * <p>
- * It also allowes a quick disable with its {@link #kill()} method, which converts all outputs to 0.
+ * It also allows a quick disable with its {@link #kill()} method, which converts all outputs to 0.
  * 
  * @author Atai Ambus
  */
@@ -130,13 +132,18 @@ public class EvergreenJoystick extends Joystick implements LoggableObject {
 
     @Override
     public List<LoggableData> getLoggableData() {
-        return List.of(
-            new LoggableDouble("X axis", this::getX),
-            new LoggableDouble("Y axis", this::getY),
-            new LoggableDouble("Z axis", this::getZ),
-            new LoggableDouble("Throttle", this::getThrottle),
-            new LoggableDouble("Twist", this::getTwist)
-        );
+        
+        ArrayList<LoggableData> res = new ArrayList<>();
+        // Using List.of created a compilation error, but it is unclear why. As such would be significantly more 
+        // elegant (all in one method instead of the full res.add for each one, with an additional return statement 
+        // and list deceleration), it is recommended to try and fix it for the next version.
+        res.add(new LoggableDouble("X axis", this::getX));
+        res.add(new LoggableDouble("Y axis", this::getY));
+        res.add(new LoggableDouble("Z axis", this::getZ));
+        res.add(new LoggableDouble("Throttle", this::getThrottle));
+        res.add(new LoggableDouble("Twist", this::getTwist));
+        res.add(new LoggableInt("POV", this::getPOV));
+        return res;
     }
 
     private static int AXES_NUM() {

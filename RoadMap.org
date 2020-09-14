@@ -10,6 +10,8 @@
     Using other classes in the implimintation should simplify the overall code and rely more on classes we need to test anyway, thus decreasing our overall testing workload. It should also make the code clearer, as it really is just an upper and a bottom limits.  
 ** TODO Create abstract classes for Shuffleboard commands
     SetSwitch and SetConstant retain a very similar structure and loggable data. It would be more efficent and clearer to abstract them into a simpler command (together with SetConstantUntil) and extend it for each data type. 
+** TODO Use List.of in EvergreenJoystick loggable data
+    List.of created weird erros. Changing to array list solved the problem, but it is much less elegant.
 * PROJ Bugixes
 * PROJ Features
 ** TODO Disable networktables.ini
