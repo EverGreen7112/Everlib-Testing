@@ -6,6 +6,7 @@ import java.util.List;
 import com.evergreen.fertilizer.oi.OIExceptions;
 import com.evergreen.fertilizer.shuffleboard.loggables.LoggableData;
 import com.evergreen.fertilizer.shuffleboard.loggables.LoggableDouble;
+import com.evergreen.fertilizer.shuffleboard.loggables.LoggableInt;
 import com.evergreen.fertilizer.shuffleboard.loggables.LoggableObject;
 import com.evergreen.fertilizer.utils.Adjuster;
 
@@ -141,6 +142,7 @@ public class EvergreenJoystick extends Joystick implements LoggableObject {
         res.add(new LoggableDouble("Z axis", this::getZ));
         res.add(new LoggableDouble("Throttle", this::getThrottle));
         res.add(new LoggableDouble("Twist", this::getTwist));
+        res.add(new LoggableInt("POV", this::getPOV));
         return res;
     }
 
