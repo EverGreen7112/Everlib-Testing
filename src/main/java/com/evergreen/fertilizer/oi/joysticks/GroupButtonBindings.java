@@ -41,7 +41,7 @@ public class GroupButtonBindings {
      * Make input buttons run the input command's {@link Command#start()} once, when they they are first
      * pressed.
      * @param command - The command to be run when the buttons are pressed.
-     * @param buttons - The buttons to press to run the comand
+     * @param buttons - The buttons to press to run the command
      */
     public static void whenPressed(Command command, Button... buttons)
     {

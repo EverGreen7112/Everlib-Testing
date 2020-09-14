@@ -14,9 +14,9 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
  * Logitech's Extreme 3D Pro Joystick</a>, using our knowledge of the model to create easy 
  * access to its buttons (see {@link #getButton(X, Y, Z)})
  * <p><p>
- * Note that this class inherits {@link JoystickEG}, so it can be constructed with an
+ * Note that this class inherits {@link EvergreenJoystick}, so it can be constructed with an
  * {@link Adjuster} which will automatically adjust its getRawAxis values, and can be easily
- * exponentiated with {@link #setExponential()} and {@link #setInverted()}. 
+ * quadrated with {@link #setExponential()} and {@link #setInverted()}. 
  * 
  * @author Atai Ambus
  */
@@ -78,8 +78,8 @@ public class ExtremeProJoystick extends EvergreenJoystick {
      * 
      * The buttons of each {@link ExtremeProJoystick} are divided thrice - once on the Z axis, 
      * into top (on top of the joystick and on its base), then in each top and bottom divided
-     * into back (closest to driver) and forward (farthest from driver). In the bottoms ection 
-     * it is divided more, to also a middle section (between forward and back). Each Y swction 
+     * into back (closest to driver) and forward (farthest from driver). In the bottoms section 
+     * it is divided more, to also a middle section (between forward and back). Each Y section 
      * is divided once more - into Left and Right buttons (X axis.)
      * 
      * As such we require three -

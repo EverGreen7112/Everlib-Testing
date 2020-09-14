@@ -15,15 +15,15 @@ import edu.wpi.first.wpilibj.Joystick;
 /**
  * The base class for {@link Joystick}s in the Evergreen Framework.
 * <p>
- * Most importantly, it provides easy methods to invert and expontiate the
- * joytsick axis, and allowes {@link #getRawAxis(AxisType) getRawAxis} by
+ * Most importantly, it provides easy methods to invert and quadrate the
+ * joystick axis, and allows {@link #getRawAxis(AxisType) getRawAxis} by
  * {@link AxisType}, for clearer code.
 * <p>
  * For more advance adjustments,this class contains an {@link Adjuster adjuster}
  * for each of the axes, which can be set using its
  * {@link #setAxisAdjuster(int, Adjuster)} method.
 * <p>
- * It also allowes a quick disable with its {@link #kill()} method, which converts all outputs to 0.
+ * It also allows a quick disable with its {@link #kill()} method, which converts all outputs to 0.
  * 
  * @author Atai Ambus
  */
