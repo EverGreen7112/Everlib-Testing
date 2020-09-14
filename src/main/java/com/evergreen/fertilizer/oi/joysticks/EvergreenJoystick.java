@@ -133,9 +133,9 @@ public class EvergreenJoystick extends Joystick implements LoggableObject {
     public List<LoggableData> getLoggableData() {
         
         ArrayList<LoggableData> res = new ArrayList<>();
-            new LoggableDouble("Y axis", this::getY),
-            new LoggableDouble("Z axis", this::getZ),
-            new LoggableDouble("Throttle", this::getThrottle),
+        // Using List.of created a compilation error, but it is unclear why. As such would be significantly more 
+        // elegant (all in one method instead of the full res.add for each one, with an additional return statement 
+        // and list deceleration), it is recommended to try and fix it for the next version.
         res.add(new LoggableDouble("X axis", this::getX));
         res.add(new LoggableDouble("Y axis", this::getY));
         res.add(new LoggableDouble("Z axis", this::getZ));
