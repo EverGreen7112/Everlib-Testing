@@ -17,11 +17,11 @@ import edu.wpi.first.wpilibj2.command.Command;
 /**
  * A {@link Command} that moves the a motor subsystem in a straight line to a target by input supplier,
  *  using a <a href=https://whatis.techtarget.com/definition/bang-bang-control> bang-bang control 
- * algoritm</a>.
+ * algorithm</a>.
  */
 public class MotorSystemBangBang extends MoveMotorSystem {
   
-  /**Supplier of the target's ditance from the same point a the distance supplier mesures the 
+  /**Supplier of the target's distance from the same point a the distance supplier measures the 
    * subsystem's distance.*/ 
   public Supplier<Double> m_target;
 
@@ -32,9 +32,9 @@ public class MotorSystemBangBang extends MoveMotorSystem {
   /**
   * The constructor for this class, which sets its speed and target. 
   * @param subsystem - The subsystem to be moved to target.
-  * @param motorSpeed - The speed modifier of the subsystem as it moves forward to target. If the movemennt
+  * @param motorSpeed - The speed modifier of the subsystem as it moves forward to target. If the movements
   * will be backwards, this modifier will be inverted.
-  * @param target -Supplier of the target's ditance from the same point the distanceSupplier mesures from.
+  * @param target -Supplier of the target's distance from the same point the distanceSupplier measures from.
   * @param targetName - The name of the target to move the subsystem to, to be used for this command's switch../
   */
   public MotorSystemBangBang(

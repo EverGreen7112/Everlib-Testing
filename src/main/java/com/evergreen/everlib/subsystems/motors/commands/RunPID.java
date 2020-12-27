@@ -27,18 +27,18 @@ public class RunPID extends EvergreenCommand {
                   PIDSettings pidSettings, 
                   Supplier<Double> target,
                   Consumer<Double> output,
-                  Supplier<Double> mesurement,
+                  Supplier<Double> measurement,
                   EvergreenSubsystem... requirements) {
         super(name);
         m_command = new PIDCommand(
             pidSettings.getController(), 
-            () -> mesurement.get(), 
+            () -> measurement.get(), 
             () -> target.get(), 
             (v) -> output.accept(v), 
             requirements);
 
         m_settings = pidSettings;
-        m_measurement = mesurement;
+        m_measurement = measurement;
         
     }
 

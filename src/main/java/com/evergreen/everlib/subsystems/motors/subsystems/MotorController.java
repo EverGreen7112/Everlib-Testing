@@ -22,8 +22,8 @@ import com.evergreen.everlib.shuffleboard.loggables.LoggableObject;
 
 
 /**
- * This is a wrapper class for {@link SpeedController}, which allowes easier and more generic
- * construction of SpeedControlelr objects.
+ * This is a wrapper class for {@link SpeedController}, which allows easier and more generic
+ * construction of SpeedController objects.
  * 
  * @author Atai Ambus
  */
@@ -37,7 +37,7 @@ public class MotorController implements SpeedController, LoggableObject {
     }
 
     /**
-     * A list of all motors this objects controlls.
+     * A list of all motors this objects controls.
       */
     private final ArrayList<SpeedController> m_motors = new ArrayList<>();
     private final List<EvergreenEncoder> m_encoders = new ArrayList<>();
@@ -45,29 +45,29 @@ public class MotorController implements SpeedController, LoggableObject {
 
 
     /**
-     * Constructs a new {@link MotorController} which controlls one of more motors with the same 
+     * Constructs a new {@link MotorController} which controls one or more motors with the same 
      * type of electronic controller.
      * 
      * @param type - The {@link ControllerType} type of the electronic speed controllers that 
      * produce the voltage for the motors. (Victor, Talon, ect.)
      * 
-     * @param ports - The roborio ports the voltage controllers conect to.
+     * @param ports - The roborio ports the voltage controllers connect to.
      */
     public MotorController(String name, ControllerType type, int... ports) {
         
         m_name = name;
         SpeedController iterationMotor;
 
-        //intializing them.
+        //initializing them.
         for(int i = 0; i < ports.length; i++)
         {
-            iterationMotor = type.initlize(ports[i]);
+            iterationMotor = type.initialize(ports[i]);
 
             if (type == ControllerType.SPARKMAX_BRUSHED || 
                 type == ControllerType.SPARKMAX_BRUSHLESS) {
                     m_encoders.add(new EvergreenEncoder( 
                         getName() + "/Encoder #" + i,
-                        //Casting the motor to sparkmax to get its encoder
+                        //Casting the motor to SparkMax to get its encoder
                         ((CANSparkMax)iterationMotor) 
                             .getEncoder()));
             }
@@ -96,7 +96,7 @@ public class MotorController implements SpeedController, LoggableObject {
 
     /**
      * Returns the encoder of the first encoder this controller uses. 
-     * Usefull if there is only one.
+     * Useful if there is only one.
      * <p>
      * If the controller has no encoders, a  {@link SensorDoesNotExistException} will be thrown
      */
@@ -110,10 +110,10 @@ public class MotorController implements SpeedController, LoggableObject {
 
 
     /**
-     * Consrtucts a {@link MotorController} which combines multiple other MotorControllers.
+     * Constructs a {@link MotorController} which combines multiple other MotorControllers.
      * Also works as a copy constructor. <p>
      * 
-     * The new Controller's methods will aplly on all the given controllers.
+     * The new Controller's methods will apply on all the given controllers.
      * 
      * @param controllers - The controllers to combine.
      */
@@ -164,7 +164,7 @@ public class MotorController implements SpeedController, LoggableObject {
         }
     }
 
-    public void setInverted(int index, boolean isInverted) {
+    public void setInvertedAt(int index, boolean isInverted) {
         getMotors().get(index).setInverted(isInverted);
     }
 
@@ -178,7 +178,7 @@ public class MotorController implements SpeedController, LoggableObject {
         return true;
     }
 
-    public boolean getInverted(int index) {
+    public boolean getInvertedAt(int index) {
         return getMotors().get(index).getInverted();
     }
 
@@ -222,7 +222,6 @@ public class MotorController implements SpeedController, LoggableObject {
         }
 
         return result;
-
     }
 
     /**A controller model - Victor SPX, Talon SRX, ect. */
@@ -235,7 +234,7 @@ public class MotorController implements SpeedController, LoggableObject {
 
         MotorInitializer m_init;
 
-        SpeedController initlize(int channel) {
+        SpeedController initialize(int channel) {
             return m_init.generate(channel);
         }
 

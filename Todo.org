@@ -124,7 +124,7 @@
 - [ ] PistonSubsystem
 ** TODO Framework/Structure [0/1]
 - [ ] Tree
-* PROJ Test [16%]
+* PROJ Test [61%]
 ** DONE Framework/Shuffleboard [1/1]
 - [X] Explorer
 ** DONE Loggables [4/4]
@@ -143,27 +143,27 @@
 - [X] ConstantString
 - [X] DashboardConstants
 - [X] ConstantInt
-** TODO Constant Commands [0/4]
-- [ ] SetConstant
-- [ ] SetSwitch
-- [ ] ToggleSwitch
-- [ ] SetConstantUntil
-** TODO Framework/Commands [0/2]
-- [ ] EvergreenCommand
-- [ ] InstantEvergreenCommand
-** TODO Framework/Ranges [0/5]
-- [ ] Range
-- [ ] MinLimit
-- [ ] MaxLimit
-- [ ] DoubleLimit
-- [ ] Limitless
-** TODO OI [0/6]
-- [ ] Adjuster
-- [ ] EvergreenJoystick
-- [ ] F310GamePad
-- [ ] ExtremeProJoystick
-- [ ] GroupButtonBindings
-- [ ] OIExceptions
+** DONE Framework/Commands [2/2]
+- [X] EvergreenCommand
+- [X] InstantEvergreenCommand
+** DONE Constant Commands [4/4]
+- [X] SetConstant
+- [X] SetSwitch
+- [X] ToggleSwitch
+- [X] SetConstantUntil
+** DONE Framework/Ranges [5/5]
+- [X] Range
+- [X] MinLimit
+- [X] MaxLimit
+- [X] DoubleLimit
+- [X] Limitless
+** DONE OI [6/6]
+- [X] Adjuster
+- [X] EvergreenJoystick
+- [X] F310GamePad
+- [X] ExtremeProJoystick
+- [X] GroupButtonBindings
+- [X] OIExceptions
 ** TODO Sensor Classes [0/4]
 - [ ] DistanceSensorGroup
 - [ ] LaserSensor

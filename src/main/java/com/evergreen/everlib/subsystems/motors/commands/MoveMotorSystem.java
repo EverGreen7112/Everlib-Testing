@@ -20,7 +20,7 @@ import com.evergreen.everlib.subsystems.motors.subsystems.MotorSubsystem;
 import com.evergreen.everlib.utils.ranges.Range;
 
 /**
- * Moves a {@link MotorSubsystem} according to iput speed and range.
+ * Moves a {@link MotorSubsystem} according to input speed and range.
  */
 public class MoveMotorSystem extends SetMotorSystem {
 
@@ -30,7 +30,7 @@ public class MoveMotorSystem extends SetMotorSystem {
    * @param name - The name of the command, corresponding to its {@link #getName()} method and to its
    * {@link ConstantBoolean shuffleboard switch}
    * @param subsystem - The subsystem to move.
-   * @param speed - The speed supplier ywhich will supply the speed to move the subsystem.
+   * @param speed - The speed supplier which will supply the speed to move the subsystem.
    * @param speedRange - The range in which to move the subsystem.
    */
   public MoveMotorSystem(String name, MotorSubsystem subsystem, Supplier<Double> speed, Range speedRange ) {
@@ -43,7 +43,7 @@ public class MoveMotorSystem extends SetMotorSystem {
    * @param name - The name of the command, corresponding to its {@link #getName()} method and to its
    * {@link ConstantBoolean shuffleboard switch}
    * @param subsystem - The subsystem to move.
-   * @param speed - The speed supplier ywhich will supply the speed to move the subsystem.
+   * @param speed - The speed supplier which will supply the speed to move the subsystem.
    * @param speedModifier - the value modifier for the speed supplier fo this movement
    * @param speedRange - The range in which to move the subsystem.
    */
@@ -70,7 +70,7 @@ public class MoveMotorSystem extends SetMotorSystem {
   * @param name - The name of the command, corresponding to its {@link #getName()} method and to its
   * {@link ConstantBoolean shuffleboard switch}
   * @param subsystem - The subsystem to move.
-  * @param speed - The speed supplier ywhich will supply the speed to move the subsystem.
+  * @param speed - The speed supplier which will supply the speed to move the subsystem.
   * @param speedModifier - the value modifier for the speed supplier fo this movement
   */
   public MoveMotorSystem(String name, MotorSubsystem subsystem, Supplier<Double> speed, 

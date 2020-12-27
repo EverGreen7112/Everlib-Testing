@@ -15,7 +15,7 @@ import com.evergreen.everlib.utils.ranges.Range;
 public class TankDrive extends SetMotorSystem {
 
   /**
-   * Constructs a {@link SetMotorSystem MoveMotorSystem Command} according to input parameteres   
+   * Constructs a {@link SetMotorSystem MoveMotorSystem Command} according to input parameters   
    * @param name - The command's name - will correspond to its getName() method, and be the key
    * to its shuffleboard switch.
    * @param subsystem - The subsystem to move.
@@ -27,7 +27,7 @@ public class TankDrive extends SetMotorSystem {
   }
 
   /**
-   * Constructs a {@link TanKDrive TanKDrive Command} according to input parameteres   
+   * Constructs a {@link TanKDrive TanKDrive Command} according to input parameters   
    * @param name - The command's name - will correspond to its getName() method, and be the key
    * to its shuffleboard switch.
    * @param subsystem - The subsystem to move.
@@ -41,7 +41,7 @@ public class TankDrive extends SetMotorSystem {
   }
 
   /**
-   * Constructs a {@link TanKDrive TanKDrive Command} according to input parameteres   
+   * Constructs a {@link TanKDrive TanKDrive Command} according to input parameters   
    * @param name - The command's name - will correspond to its getName() method, and be the key
    * to its shuffleboard switch.
    * @param subsystem - The subsystem to move.
@@ -55,7 +55,7 @@ public class TankDrive extends SetMotorSystem {
 
   /**
    * 
-   * Constructs a {@link TanKDrive TanKDrive Command} according to input parameteres   
+   * Constructs a {@link TanKDrive TanKDrive Command} according to input parameters   
    * @param name - The command's name - will correspond to its getName() method, and be the key
    * to its shuffleboard switch.
    * @param subsystem - The subsystem to move.
